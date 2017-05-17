@@ -1,0 +1,33 @@
+﻿<Window x:Class="RyaScape.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:viewModel="clr-namespace:RyaScape.ViewModel"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:dragablz="clr-namespace:Dragablz;assembly=Dragablz"
+        xmlns:UserControl="clr-namespace:RyaScape.UIControls"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"     
+        Background="{DynamicResource MaterialDesignPaper}"
+        FontFamily="{DynamicResource MaterialDesignFont}"
+        mc:Ignorable="d"
+        Title="RyaScape" Height="500" Width="550" MaxWidth="550" Icon="Resources/RyaScape.ico">
+    <Grid>
+        <DockPanel>
+            <dragablz:TabablzControl>
+                <dragablz:TabablzControl.InterTabController>
+                    <dragablz:InterTabController />
+                </dragablz:TabablzControl.InterTabController>
+                <TabItem Header="Highscore">
+                    <UserControl:HighscoreControl DataContext="{Binding HighscoreModel}"/>
+                </TabItem>
+                <TabItem Header="Quests">
+                    <UserControl:QuestingControl DataContext="{Binding QuestingModel}"/>
+                </TabItem>
+                <TabItem Header="About">
+                    <UserControl:AboutControl DataContext="{Binding}"/>
+                </TabItem>
+            </dragablz:TabablzControl>
+        </DockPanel>
+    </Grid>
+</Window>
