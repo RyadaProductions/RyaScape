@@ -4,31 +4,31 @@ namespace RyaScape.Models {
   public static class PlayerStats {
     public static string PlayerName = "";
 
-    public static Dictionary<SkillTypes, Skill> Player = new Dictionary<SkillTypes, Skill>() {
-      [SkillTypes.Total] = new Skill(),
-      [SkillTypes.Attack] = new Skill(),
-      [SkillTypes.Defence] = new Skill(),
-      [SkillTypes.Strength] = new Skill(),
-      [SkillTypes.Hitpoints] = new Skill(),
-      [SkillTypes.Ranged] = new Skill(),
-      [SkillTypes.Prayer] = new Skill(),
-      [SkillTypes.Magic] = new Skill(),
-      [SkillTypes.Cooking] = new Skill(),
-      [SkillTypes.Woodcutting] = new Skill(),
-      [SkillTypes.Fletching] = new Skill(),
-      [SkillTypes.Fishing] = new Skill(),
-      [SkillTypes.Firemaking] = new Skill(),
-      [SkillTypes.Crafting] = new Skill(),
-      [SkillTypes.Smithing] = new Skill(),
-      [SkillTypes.Mining] = new Skill(),
-      [SkillTypes.Herblore] = new Skill(),
-      [SkillTypes.Agility] = new Skill(),
-      [SkillTypes.Thieving] = new Skill(),
-      [SkillTypes.Slayer] = new Skill(),
-      [SkillTypes.Farming] = new Skill(),
-      [SkillTypes.Runecraft] = new Skill(),
-      [SkillTypes.Hunter] = new Skill(),
-      [SkillTypes.Construction] = new Skill()
+    public static Dictionary<SkillType, Skill> Player = new Dictionary<SkillType, Skill>() {
+      [SkillType.Total] = new Skill(),
+      [SkillType.Attack] = new Skill(),
+      [SkillType.Defence] = new Skill(),
+      [SkillType.Strength] = new Skill(),
+      [SkillType.Hitpoints] = new Skill(),
+      [SkillType.Ranged] = new Skill(),
+      [SkillType.Prayer] = new Skill(),
+      [SkillType.Magic] = new Skill(),
+      [SkillType.Cooking] = new Skill(),
+      [SkillType.Woodcutting] = new Skill(),
+      [SkillType.Fletching] = new Skill(),
+      [SkillType.Fishing] = new Skill(),
+      [SkillType.Firemaking] = new Skill(),
+      [SkillType.Crafting] = new Skill(),
+      [SkillType.Smithing] = new Skill(),
+      [SkillType.Mining] = new Skill(),
+      [SkillType.Herblore] = new Skill(),
+      [SkillType.Agility] = new Skill(),
+      [SkillType.Thieving] = new Skill(),
+      [SkillType.Slayer] = new Skill(),
+      [SkillType.Farming] = new Skill(),
+      [SkillType.Runecraft] = new Skill(),
+      [SkillType.Hunter] = new Skill(),
+      [SkillType.Construction] = new Skill()
     };
   }
 }

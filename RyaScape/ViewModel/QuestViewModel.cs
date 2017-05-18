@@ -11,7 +11,7 @@ namespace RyaScape.ViewModel {
     private string _Name;
     private bool _Completed;
     private List<Quest> _PrerequisteQuests;
-    private Dictionary<SkillTypes, int> _PrerequisteSkills;
+    private Dictionary<SkillType, int> _PrerequisteSkills;
     private List<Requirements> _Requirements;
 
     public string Name {
@@ -38,7 +38,7 @@ namespace RyaScape.ViewModel {
       }
     }
 
-    public Dictionary<SkillTypes, int> PrerequisteSkills {
+    public Dictionary<SkillType, int> PrerequisteSkills {
       get { return _PrerequisteSkills; }
       set {
         _PrerequisteSkills = value;

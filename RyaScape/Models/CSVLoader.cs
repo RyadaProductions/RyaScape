@@ -28,7 +28,7 @@ namespace RyaScape.Models {
           var meh = data.Split('\n');
 
           for (var i = 0; i < 24; i++) {
-            var skill = (SkillTypes)i;
+            var skill = (SkillType)i;
             var line = meh[i].Split(',');
             try {
               PlayerStats.Player[skill].Rank = long.Parse(line[0]);
@@ -62,7 +62,7 @@ namespace RyaScape.Models {
     }
 
     private static void FillStats(CSVResult highscore) {
-      foreach (var skill in EnumToArray<SkillTypes>()) {
+      foreach (var skill in EnumToArray<SkillType>()) {
         highscore.Skills.Add(new SkillLevelViewModel() {
           Skill = skill.ToString(),
           Level = PlayerStats.Player[skill].Level,

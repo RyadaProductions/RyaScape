@@ -88,7 +88,7 @@
     <Compile Include="Models\Skill.cs" />
     <Compile Include="Models\CSVLoader.cs" />
     <Compile Include="Models\PlayerStats.cs" />
-    <Compile Include="Models\SkillTypes.cs" />
+    <Compile Include="Models\SkillType.cs" />
     <Compile Include="UIControls\AboutControl.xaml.cs">
       <DependentUpon>AboutControl.xaml</DependentUpon>
     </Compile>

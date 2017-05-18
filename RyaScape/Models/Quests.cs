@@ -8,7 +8,7 @@ namespace RyaScape.Models {
   public class Quest {
     public string Name { get; set; }
     public List<Quest> PrerequisteQuests { get; } = new List<Quest>();
-    public Dictionary<SkillTypes, int> PrerequisteSkills { get; } = new Dictionary<SkillTypes, int>();
+    public Dictionary<SkillType, int> PrerequisteSkills { get; } = new Dictionary<SkillType, int>();
     public bool Completed { get; set; }
 
     public Quest() {
@@ -21,7 +21,7 @@ namespace RyaScape.Models {
       PrerequisteQuests.Add(quest);
     }
 
-    public void SetPrequesite(SkillTypes skill, int level) {
+    public void SetPrequesite(SkillType skill, int level) {
       if (PrerequisteSkills.ContainsKey(skill))
         PrerequisteSkills[skill] = level;
       else
@@ -49,7 +49,7 @@ namespace RyaScape.Models {
       var DoricsQuest = new Quest() {
         Name = "Doric's Quest",
         PrerequisteSkills = {
-          { SkillTypes.Mining, 15 }
+          { SkillType.Mining, 15 }
         },
       };
 
@@ -57,8 +57,8 @@ namespace RyaScape.Models {
         Name = "Slayer Slayer",
         PrerequisteSkills =
           {
-                { SkillTypes.Attack, 45 },
-                { SkillTypes.Construction, 42 }
+                { SkillType.Attack, 45 },
+                { SkillType.Construction, 42 }
             },
         PrerequisteQuests = { BlackKnightsFortress }
       };
