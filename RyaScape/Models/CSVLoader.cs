@@ -25,15 +25,15 @@ namespace RyaScape.Models {
 
           await Task.Delay(1000);
 
-          var meh = data.Split('\n');
+          var line = data.Split('\n');
 
           for (var i = 0; i < 24; i++) {
             var skill = (SkillType)i;
-            var line = meh[i].Split(',');
+            var value = line[i].Split(',');
             try {
-              PlayerStats.Player[skill].Rank = long.Parse(line[0]);
-              PlayerStats.Player[skill].Level = long.Parse(line[1]);
-              PlayerStats.Player[skill].Exp = long.Parse(line[2]);
+              PlayerStats.Player[skill].Rank = long.Parse(value[0]);
+              PlayerStats.Player[skill].Level = long.Parse(value[1]);
+              PlayerStats.Player[skill].Exp = long.Parse(value[2]);
             } catch (Exception ex) {
               MessageBox.Show(ex.Message);
             }
