@@ -187,9 +187,6 @@
     <Resource Include="Resources\07skill-icons\Total-icon.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Mockup.txt" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Resources\ryua.png" />
   </ItemGroup>
   <ItemGroup>
