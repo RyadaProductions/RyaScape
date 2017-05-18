@@ -9,6 +9,7 @@ namespace RyaScape.Models {
     public string Name { get; set; }
     public List<Quest> PrerequisteQuests { get; } = new List<Quest>();
     public Dictionary<SkillTypes, int> PrerequisteSkills { get; } = new Dictionary<SkillTypes, int>();
+    public bool Completed { get; set; }
 
     public Quest() {
 
@@ -34,6 +35,7 @@ namespace RyaScape.Models {
     public Quests() {
       var BlackKnightsFortress = new Quest() {
         Name = "Black Knights' Fortress",
+        Completed = true
       };
 
       var CooksAssistant = new Quest() {

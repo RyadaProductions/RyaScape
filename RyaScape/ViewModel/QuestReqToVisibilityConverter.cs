@@ -9,7 +9,7 @@ namespace RyaScape.ViewModel {
   public sealed class QuestReqToVisibilityConverter : MarkupExtension, IValueConverter {
     public object Convert(object value, Type targetType, object parameter, CultureInfo culture) {
       var temp = value as List<Requirements>;
-      return temp.Count == 0 ? Visibility.Hidden : Visibility.Visible;
+      return temp.Count == 0 ? Visibility.Collapsed : Visibility.Visible;
     }
 
     public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture) {

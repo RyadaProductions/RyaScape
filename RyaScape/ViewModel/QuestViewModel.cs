@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 namespace RyaScape.ViewModel {
   public class QuestViewModel : BaseViewModel {
     private string _Name;
+    private bool _Completed;
     private List<Quest> _PrerequisteQuests;
     private Dictionary<SkillTypes, int> _PrerequisteSkills;
     private List<Requirements> _Requirements;
@@ -17,6 +18,14 @@ namespace RyaScape.ViewModel {
       get { return _Name; }
       set {
         _Name = value;
+        RaisePropertyChanged();
+      }
+    }
+
+    public bool Completed {
+      get { return _Completed; }
+      set {
+        _Completed = value;
         RaisePropertyChanged();
       }
     }

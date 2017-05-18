@@ -23,11 +23,13 @@ namespace RyaScape.ViewModel {
       QuestList.Clear();
       foreach (var X in tempquestList) {
         List<Requirements> Questrequirements = new List<Requirements>();
-        
+
         foreach (var skill in X.Value.PrerequisteSkills) {
           if (PlayerStats.Player[skill.Key].Level >= skill.Value) {
-            Requirements req = new Requirements { RequirementName = skill.Value.ToString() + " " + skill.Key.ToString(),
-            RequirementStatus = "Strikethrough"};
+            Requirements req = new Requirements {
+              RequirementName = skill.Value.ToString() + " " + skill.Key.ToString(),
+              RequirementStatus = "Strikethrough"
+            };
             Questrequirements.Add(req);
           } else {
             Requirements req = new Requirements {
@@ -45,16 +47,24 @@ namespace RyaScape.ViewModel {
           Questrequirements.Add(req);
         }
         foreach (var quests in X.Value.PrerequisteQuests) {
-          Requirements req = new Requirements {
-            RequirementName = quests.Name,
-            RequirementStatus = ""
-          };
-          Questrequirements.Add(req);
+          if (quests.Completed == true) {
+            Requirements req = new Requirements {
+              RequirementName = quests.Name,
+              RequirementStatus = "Strikethrough"
+            };
+            Questrequirements.Add(req);
+          } else {
+            Requirements req = new Requirements {
+              RequirementName = quests.Name,
+              RequirementStatus = ""
+            };
+            Questrequirements.Add(req);
+          }
         }
-
 
         QuestList.Add(new QuestViewModel {
           Name = X.Value.Name,
+          Completed = X.Value.Completed,
           PrerequisteQuests = X.Value.PrerequisteQuests,
           PrerequisteSkills = X.Value.PrerequisteSkills,
           Requirements = Questrequirements
