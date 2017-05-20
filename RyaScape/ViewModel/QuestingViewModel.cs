@@ -19,47 +19,39 @@ namespace RyaScape.ViewModel {
     public void Load() {
       var loader = new Quests();
       Dictionary<string, Quest> tempquestList = loader.GetQuests();
-
       QuestList.Clear();
       foreach (var X in tempquestList) {
         List<Requirements> Questrequirements = new List<Requirements>();
 
         foreach (var skill in X.Value.PrerequisteSkills) {
+          Requirements req = new Requirements();
+
+          req.RequirementName = skill.Value.ToString() + " " + skill.Key.ToString();
+
           if (PlayerStats.Player[skill.Key].Level >= skill.Value) {
-            Requirements req = new Requirements {
-              RequirementName = skill.Value.ToString() + " " + skill.Key.ToString(),
-              RequirementStatus = "Strikethrough"
-            };
-            Questrequirements.Add(req);
+            req.RequirementStatus = "Strikethrough";
           } else {
-            Requirements req = new Requirements {
-              RequirementName = skill.Value.ToString() + " " + skill.Key.ToString(),
-              RequirementStatus = ""
-            };
-            Questrequirements.Add(req);
+            req.RequirementStatus = "";
           }
-        }
-        if (X.Value.PrerequisteQuests.Count > 0) {
-          Requirements req = new Requirements {
-            RequirementName = "",
-            RequirementStatus = ""
-          };
           Questrequirements.Add(req);
         }
+
+        if (X.Value.PrerequisteQuests.Count > 0) {
+          Requirements req = new Requirements();
+          Questrequirements.Add(req);
+        }
+
         foreach (var quests in X.Value.PrerequisteQuests) {
+          Requirements req = new Requirements();
+
+          req.RequirementName = quests.Name;
+
           if (quests.Completed == true) {
-            Requirements req = new Requirements {
-              RequirementName = quests.Name,
-              RequirementStatus = "Strikethrough"
-            };
-            Questrequirements.Add(req);
+            req.RequirementStatus = "Strikethrough";
           } else {
-            Requirements req = new Requirements {
-              RequirementName = quests.Name,
-              RequirementStatus = ""
-            };
-            Questrequirements.Add(req);
+            req.RequirementStatus = "";
           }
+          Questrequirements.Add(req);
         }
 
         QuestList.Add(new QuestViewModel {

@@ -29,11 +29,12 @@ namespace RyaScape.Models {
 
           for (var i = 0; i < 24; i++) {
             var skill = (SkillType)i;
-            var value = line[i].Split(',');
+            var values = line[i].Split(',');
+
             try {
-              PlayerStats.Player[skill].Rank = long.Parse(value[0]);
-              PlayerStats.Player[skill].Level = long.Parse(value[1]);
-              PlayerStats.Player[skill].Exp = long.Parse(value[2]);
+              PlayerStats.Player[skill].Rank = long.Parse(values[0]);
+              PlayerStats.Player[skill].Level = long.Parse(values[1]);
+              PlayerStats.Player[skill].Exp = long.Parse(values[2]);
             } catch (Exception ex) {
               MessageBox.Show(ex.Message);
             }
