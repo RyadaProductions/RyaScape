@@ -63,9 +63,9 @@ namespace RyaScape.Models
         Name = "Slayer Slayer",
         PrerequisteSkills =
           {
-                { SkillType.Attack, 45 },
-                { SkillType.Construction, 42 }
-            },
+            { SkillType.Attack, 45 },
+            { SkillType.Construction, 42 }
+          },
         PrerequisteQuests = { BlackKnightsFortress }
       };
 

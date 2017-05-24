@@ -62,11 +62,11 @@ namespace RyaScape.ViewModel
 
       QuestList.Clear();
 
-      foreach (var X in tempquestList)
+      foreach (var quest in tempquestList)
       {
         List<Requirements> Questrequirements = new List<Requirements>();
 
-        foreach (var skill in X.Value.PrerequisteSkills)
+        foreach (var skill in quest.Value.PrerequisteSkills)
         {
           Requirements req = new Requirements();
 
@@ -76,13 +76,13 @@ namespace RyaScape.ViewModel
           Questrequirements.Add(req);
         }
 
-        if (X.Value.PrerequisteQuests.Count > 0)
+        if (quest.Value.PrerequisteQuests.Count > 0)
         {
           Requirements req = new Requirements();
           Questrequirements.Add(req);
         }
 
-        foreach (var quests in X.Value.PrerequisteQuests)
+        foreach (var quests in quest.Value.PrerequisteQuests)
         {
           Requirements req = new Requirements();
 
@@ -93,10 +93,10 @@ namespace RyaScape.ViewModel
         }
 
         QuestViewModel newQuest = new QuestViewModel {
-          Name = X.Value.Name,
-          Completed = X.Value.Completed,
-          PrerequisteQuests = X.Value.PrerequisteQuests,
-          PrerequisteSkills = X.Value.PrerequisteSkills,
+          Name = quest.Value.Name,
+          Completed = quest.Value.Completed,
+          PrerequisteQuests = quest.Value.PrerequisteQuests,
+          PrerequisteSkills = quest.Value.PrerequisteSkills,
           Requirements = Questrequirements
         };
         newQuest.PropertyChanged += new PropertyChangedEventHandler(Update);
