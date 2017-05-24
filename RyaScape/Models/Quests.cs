@@ -4,24 +4,29 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace RyaScape.Models {
-  public class Quest {
+namespace RyaScape.Models
+{
+  public class Quest
+  {
     public string Name { get; set; }
     public List<Quest> PrerequisteQuests { get; } = new List<Quest>();
     public Dictionary<SkillType, int> PrerequisteSkills { get; } = new Dictionary<SkillType, int>();
     public bool Completed { get; set; }
 
-    public Quest() {
+    public Quest()
+    {
 
     }
 
-    public void SetPrequesite(Quest quest) {
+    public void SetPrequesite(Quest quest)
+    {
       if (PrerequisteQuests.Contains(quest))
         return;
       PrerequisteQuests.Add(quest);
     }
 
-    public void SetPrequesite(SkillType skill, int level) {
+    public void SetPrequesite(SkillType skill, int level)
+    {
       if (PrerequisteSkills.ContainsKey(skill))
         PrerequisteSkills[skill] = level;
       else
@@ -29,13 +34,14 @@ namespace RyaScape.Models {
     }
   }
 
-  class Quests {
+  class Quests
+  {
     private Dictionary<string, Quest> _quests = new Dictionary<string, Quest>();
 
-    public Quests() {
+    public Quests()
+    {
       var BlackKnightsFortress = new Quest() {
         Name = "Black Knights' Fortress",
-        Completed = true
       };
 
       var CooksAssistant = new Quest() {
@@ -71,7 +77,8 @@ namespace RyaScape.Models {
       _quests.Add(slayer.Name, slayer);
     }
 
-    public Dictionary<string, Quest> GetQuests() {
+    public Dictionary<string, Quest> GetQuests()
+    {
       return _quests;
     }
   }

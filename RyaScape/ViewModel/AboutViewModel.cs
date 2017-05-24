@@ -8,8 +8,10 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using System.Windows.Navigation;
 
-namespace RyaScape.ViewModel {
-  class AboutViewModel : BaseViewModel {
+namespace RyaScape.ViewModel
+{
+  class AboutViewModel : BaseViewModel
+  {
 
   }
 }

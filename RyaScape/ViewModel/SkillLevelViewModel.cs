@@ -1,39 +1,49 @@
 ﻿using NanoMVVM.ViewModels;
 
-namespace RyaScape.ViewModel {
-  public class SkillLevelViewModel : BaseViewModel {
+namespace RyaScape.ViewModel
+{
+  public class SkillLevelViewModel : BaseViewModel
+  {
     private string _skill;
     private long _rank;
     private long _level;
     private long _xp;
 
-    public string Skill {
+    public string Skill
+    {
       get { return _skill; }
-      set {
+      set
+      {
         _skill = value;
         RaisePropertyChanged();
       }
     }
 
-    public long Rank {
+    public long Rank
+    {
       get { return _rank; }
-      set {
+      set
+      {
         _rank = value;
         RaisePropertyChanged();
       }
     }
 
-    public long Level {
+    public long Level
+    {
       get { return _level; }
-      set {
+      set
+      {
         _level = value;
         RaisePropertyChanged();
       }
     }
 
-    public long Xp {
+    public long Xp
+    {
       get { return _xp; }
-      set {
+      set
+      {
         _xp = value;
         RaisePropertyChanged();
       }

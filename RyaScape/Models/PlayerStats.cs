@@ -1,7 +1,9 @@
 ﻿using System.Collections.Generic;
 
-namespace RyaScape.Models {
-  public static class PlayerStats {
+namespace RyaScape.Models
+{
+  public static class PlayerStats
+  {
     public static string PlayerName = "";
 
     public static Dictionary<SkillType, Skill> Player = new Dictionary<SkillType, Skill>() {
