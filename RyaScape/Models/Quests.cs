@@ -1134,6 +1134,68 @@ namespace RyaScape.Models
         },
         PrerequisteQuests = { RuneMysteries }
       };
+
+      var ArchitecturalAlliance = new Quest() {
+        Name = "Architectural Alliance (Miniquest)",
+        PrerequisteSkills =
+           {
+          { SkillType.Smithing, 45 },
+          { SkillType.Mining, 42 },
+          { SkillType.Fishing, 15 },
+          { SkillType.Crafting, 30 },
+          { SkillType.Hunter, 15 },
+        },
+      };
+
+      var BearYourSoul = new Quest() {
+        Name = "Bear your Soul (Miniquest)",
+      };
+
+      var CurseOfTheEmptyLord = new Quest() {
+        Name = "Curse of the Empty Lord (Miniquest)",
+        PrerequisteQuests = { DesertTreasure }
+      };
+
+      var EnchantedKey = new Quest() {
+        Name = "Enchanted Key (Miniquest)",
+        PrerequisteQuests = { MakingHistory }
+      };
+      
+      var FamilyPest = new Quest() {
+        Name = "Family Pest (Miniquest)",
+        PrerequisteQuests = { FamilyCrest }
+      };
+      
+      var TheGeneralsShadow = new Quest() {
+        Name = "The General's Shadow (Miniquest)",
+        PrerequisteQuests = { FightArena, CurseOfTheEmptyLord }
+      };
+      
+      var LairOfTarnRazorlor = new Quest() {
+        Name = "Lair of Tarn Razorlor (Miniquest)",
+        PrerequisteSkills =
+           {
+          { SkillType.Slayer, 40 },
+        },
+        PrerequisteQuests = { HauntedMine }
+      };
+      
+      var TheMageArena = new Quest() {
+        Name = "The Mage Arena (Miniquest)",
+        PrerequisteSkills =
+           {
+          { SkillType.Magic, 60 },
+        },
+      };
+
+      var RagAndBoneWishList = new Quest() {
+        Name = "Rag & Bone Wish List (Miniquest)",
+        PrerequisteQuests = { RagAndBoneMan }
+      };
+
+      var SkippyAndTheMogres = new Quest() {
+        Name = "Skippy and the Mogres (Miniquest)",
+      };
       #endregion
 
       #region Add Quests to Dictionary
@@ -1271,7 +1333,17 @@ namespace RyaScape.Models
       _quests.Add(ZogreFleshEaters.Name, ZogreFleshEaters);
       //MiniQuests
       _quests.Add(AlfredGrimhandsBarcrawl.Name, AlfredGrimhandsBarcrawl);
+      _quests.Add(ArchitecturalAlliance.Name, ArchitecturalAlliance);
+      _quests.Add(BearYourSoul.Name, BearYourSoul);
+      _quests.Add(CurseOfTheEmptyLord.Name, CurseOfTheEmptyLord);
+      _quests.Add(EnchantedKey.Name, EnchantedKey);
       _quests.Add(EnterTheAbyss.Name, EnterTheAbyss);
+      _quests.Add(FamilyPest.Name, FamilyPest);
+      _quests.Add(TheGeneralsShadow.Name, TheGeneralsShadow);
+      _quests.Add(LairOfTarnRazorlor.Name, LairOfTarnRazorlor);
+      _quests.Add(TheMageArena.Name, TheMageArena);
+      _quests.Add(RagAndBoneWishList.Name, RagAndBoneWishList);
+      _quests.Add(SkippyAndTheMogres.Name, SkippyAndTheMogres);
       #endregion
     }
 
