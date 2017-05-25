@@ -11,6 +11,7 @@ namespace RyaScape.ViewModel
   {
     private string _user;
     private string _error;
+    private MainViewModel _mainModel;
 
     public string Username
     {
@@ -36,8 +37,9 @@ namespace RyaScape.ViewModel
 
     public ICommand LoadCommand => new AwaitableDelegateCommand(Load);
 
-    public HighscoreViewModel()
+    public HighscoreViewModel(MainViewModel mainModel)
     {
+      _mainModel = mainModel;
     }
 
     public async Task Load()
@@ -51,6 +53,8 @@ namespace RyaScape.ViewModel
       Skills.Clear();
       foreach (var s in info.Skills)
         Skills.Add(s);
+
+      _mainModel.QuestingModel.Update("", new System.ComponentModel.PropertyChangedEventArgs(""));
     }
   }
 }
