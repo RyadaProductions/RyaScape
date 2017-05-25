@@ -17,21 +17,6 @@ namespace RyaScape.Models
     {
 
     }
-
-    public void SetPrequesite(Quest quest)
-    {
-      if (PrerequisteQuests.Contains(quest))
-        return;
-      PrerequisteQuests.Add(quest);
-    }
-
-    public void SetPrequesite(SkillType skill, int level)
-    {
-      if (PrerequisteSkills.ContainsKey(skill))
-        PrerequisteSkills[skill] = level;
-      else
-        PrerequisteSkills.Add(skill, level);
-    }
   }
 
   class Quests
