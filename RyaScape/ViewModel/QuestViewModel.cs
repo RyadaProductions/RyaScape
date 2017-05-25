@@ -2,6 +2,7 @@
 using RyaScape.Models;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
@@ -16,7 +17,7 @@ namespace RyaScape.ViewModel
     private bool _Completed;
     private List<Quest> _PrerequisteQuests;
     private Dictionary<SkillType, int> _PrerequisteSkills;
-    private List<Requirements> _Requirements;
+    private ObservableCollection<Requirements> _Requirements;
 
     public string Name
     {
@@ -58,7 +59,7 @@ namespace RyaScape.ViewModel
       }
     }
 
-    public List<Requirements> Requirements
+    public ObservableCollection<Requirements> Requirements
     {
       get { return _Requirements; }
       set
@@ -69,9 +70,29 @@ namespace RyaScape.ViewModel
     }
   }
 
-  public class Requirements
+  public class Requirements : BaseViewModel, INotifyPropertyChanged
   {
-    public string RequirementName { get; set; }
-    public TextDecorationCollection RequirementStatus { get; set; }
+    private string _RequirementName = "";
+    private TextDecorationCollection _RequirementStatus;
+
+    public string RequirementName
+    {
+      get { return _RequirementName; }
+      set
+      {
+        _RequirementName = value;
+        RaisePropertyChanged();
+      }
+    }
+
+    public TextDecorationCollection RequirementStatus
+    {
+      get { return _RequirementStatus; }
+      set
+      {
+        _RequirementStatus = value;
+        RaisePropertyChanged();
+      }
+    }
   }
 }

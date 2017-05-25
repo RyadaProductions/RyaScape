@@ -17,8 +17,6 @@ namespace RyaScape.ViewModel
       Load();
     }
 
-    //public ICommand UpdateCommand => new DelegateCommand(Update);
-
     public void Update(object sender, PropertyChangedEventArgs e)
     {
       foreach (var Questvm in QuestList)
@@ -64,7 +62,7 @@ namespace RyaScape.ViewModel
 
       foreach (var quest in tempquestList)
       {
-        List<Requirements> Questrequirements = new List<Requirements>();
+        ObservableCollection<Requirements> Questrequirements = new ObservableCollection<Requirements>();
 
         foreach (var skill in quest.Value.PrerequisteSkills)
         {
