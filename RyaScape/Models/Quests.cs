@@ -40,26 +40,32 @@ namespace RyaScape.Models
 
     public Quests()
     {
-      var BlackKnightsFortress = new Quest() {
+      var BlackKnightsFortress = new Quest() 
+      {
         Name = "Black Knights' Fortress",
       };
 
-      var CooksAssistant = new Quest() {
+      var CooksAssistant = new Quest()
+      {
         Name = "Cook's Assistant",
       };
 
-      var DemonSlayer = new Quest() {
+      var DemonSlayer = new Quest()
+      {
         Name = "Demon Slayer",
       };
 
-      var DoricsQuest = new Quest() {
+      var DoricsQuest = new Quest()
+      {
         Name = "Doric's Quest",
-        PrerequisteSkills = {
+        PrerequisteSkills = 
+        {
           { SkillType.Mining, 15 }
         },
       };
 
-      var slayer = new Quest() {
+      var slayer = new Quest() 
+      {
         Name = "Slayer Slayer",
         PrerequisteSkills =
           {
