@@ -26,9 +26,9 @@
                         <Run Text="Username: " />
             </TextBlock>
 
-            <TextBox Grid.Row="0" Grid.Column="2" Text="{Binding Username}" MaxLength="12" Margin="0,0,10,0"/>
+            <TextBox Grid.Row="0" Grid.Column="2" Text="{Binding Username, UpdateSourceTrigger=PropertyChanged}" MaxLength="12" Margin="0,0,10,0"/>
 
-            <Button Grid.Row="0" Grid.Column="3" Content="Lookup" Command="{Binding LoadCommand}" Margin="0,0,5,0" Height="24"></Button>
+            <Button Grid.Row="0" Grid.Column="3" Content="Lookup" Command="{Binding LoadCommand}" Margin="0,0,5,0" Height="24" IsDefault="True"></Button>
 
             <DataGrid Grid.Row="1" Grid.ColumnSpan="4" Grid.Column="0" ItemsSource="{Binding Skills}" AutoGenerateColumns="False" CanUserAddRows="False" CanUserDeleteRows="False" CanUserResizeRows="False">
 

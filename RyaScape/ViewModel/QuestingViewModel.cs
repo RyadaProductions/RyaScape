@@ -5,26 +5,23 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Windows;
 using System.Linq;
+using Newtonsoft.Json;
+using System;
+using System.IO;
 
-namespace RyaScape.ViewModel
-{
-  public class QuestingViewModel : BaseViewModel
-  {
+namespace RyaScape.ViewModel {
+  public class QuestingViewModel : BaseViewModel {
     public ObservableCollection<QuestViewModel> QuestList { get; } = new ObservableCollection<QuestViewModel>();
 
-    public QuestingViewModel()
-    {
+    public QuestingViewModel() {
       Load();
     }
 
-    public void Update(object sender, PropertyChangedEventArgs e)
-    {
-      foreach (var Questvm in QuestList)
-      {
+    public void Update(object sender, PropertyChangedEventArgs e) {
+      foreach (var Questvm in QuestList) {
         Questvm.Requirements.Clear();
 
-        foreach (var skill in Questvm.PrerequisteSkills)
-        {
+        foreach (var skill in Questvm.PrerequisteSkills) {
           Requirements req = new Requirements();
 
           req.RequirementName = skill.Value.ToString() + " " + skill.Key.ToString();
@@ -33,14 +30,12 @@ namespace RyaScape.ViewModel
           Questvm.Requirements.Add(req);
         }
 
-        if (Questvm.PrerequisteQuests.Count > 0)
-        {
+        if (Questvm.PrerequisteQuests.Count > 0) {
           Requirements req = new Requirements();
           Questvm.Requirements.Add(req);
         }
 
-        foreach (var quest in Questvm.PrerequisteQuests)
-        {
+        foreach (var quest in Questvm.PrerequisteQuests) {
           var tmpQuest = QuestList.FirstOrDefault(x => x.Name == quest.Name);
 
           Requirements req = new Requirements();
@@ -51,21 +46,26 @@ namespace RyaScape.ViewModel
           Questvm.Requirements.Add(req);
         }
       }
+      SaveCompleted();
     }
 
-    public void Load()
-    {
+    public void Load() {
       var loader = new Quests();
       Dictionary<string, Quest> tempquestList = loader.GetQuests();
 
       QuestList.Clear();
 
-      foreach (var quest in tempquestList)
-      {
+      List<string> completedQuests = new List<string>();
+      if (File.Exists(Environment.CurrentDirectory + "\\Resources\\Completed.json")) {
+        string input = File.ReadAllText(Environment.CurrentDirectory + "\\Resources\\Completed.json");
+        var desList = JsonConvert.DeserializeObject<List<string>>(input);
+        completedQuests.AddRange(desList);
+      }
+
+      foreach (var quest in tempquestList) {
         ObservableCollection<Requirements> Questrequirements = new ObservableCollection<Requirements>();
 
-        foreach (var skill in quest.Value.PrerequisteSkills)
-        {
+        foreach (var skill in quest.Value.PrerequisteSkills) {
           Requirements req = new Requirements();
 
           req.RequirementName = skill.Value.ToString() + " " + skill.Key.ToString();
@@ -74,20 +74,23 @@ namespace RyaScape.ViewModel
           Questrequirements.Add(req);
         }
 
-        if (quest.Value.PrerequisteQuests.Count > 0)
-        {
+        if (quest.Value.PrerequisteQuests.Count > 0) {
           Requirements req = new Requirements();
           Questrequirements.Add(req);
         }
 
-        foreach (var quests in quest.Value.PrerequisteQuests)
-        {
+        foreach (var quests in quest.Value.PrerequisteQuests) {
           Requirements req = new Requirements();
 
           req.RequirementName = quests.Name;
           req.RequirementStatus = quests.Completed == true ? TextDecorations.Strikethrough : null;
 
           Questrequirements.Add(req);
+        }
+
+        //Check if the quest has been saved as completed
+        if (completedQuests.Contains(quest.Value.Name)) {
+          quest.Value.Completed = true;
         }
 
         QuestViewModel newQuest = new QuestViewModel {
@@ -101,6 +104,18 @@ namespace RyaScape.ViewModel
 
         QuestList.Add(newQuest);
       }
+    }
+
+    //Save the completed quest list to disk
+    private void SaveCompleted() {
+      List<string> completedQuests = new List<string>();
+      foreach (QuestViewModel x in QuestList) {
+        if (x.Completed == true) {
+          completedQuests.Add(x.Name);
+        }
+      }
+      string json = JsonConvert.SerializeObject(completedQuests);
+      File.WriteAllText(Environment.CurrentDirectory + "\\Resources\\Completed.json", json);
     }
   }
 }
