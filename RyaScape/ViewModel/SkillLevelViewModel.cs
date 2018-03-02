@@ -11,7 +11,7 @@ namespace RyaScape.ViewModel
 
     public string Skill
     {
-      get { return _skill; }
+      get => _skill;
       set
       {
         _skill = value;
@@ -21,7 +21,7 @@ namespace RyaScape.ViewModel
 
     public long Rank
     {
-      get { return _rank; }
+      get => _rank;
       set
       {
         _rank = value;
@@ -31,7 +31,7 @@ namespace RyaScape.ViewModel
 
     public long Level
     {
-      get { return _level; }
+      get => _level;
       set
       {
         _level = value;
@@ -41,7 +41,7 @@ namespace RyaScape.ViewModel
 
     public long Xp
     {
-      get { return _xp; }
+      get => _xp;
       set
       {
         _xp = value;

@@ -1,96 +1,91 @@
 ﻿using NanoMVVM.ViewModels;
 using RyaScape.Models;
-using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 
 namespace RyaScape.ViewModel
 {
-  public class QuestViewModel : BaseViewModel, INotifyPropertyChanged
+  public class QuestViewModel : BaseViewModel
   {
-    private string _Name;
-    private bool _Completed;
-    private List<Quest> _PrerequisteQuests;
-    private Dictionary<SkillType, int> _PrerequisteSkills;
-    private ObservableCollection<Requirements> _Requirements;
+    private string _name;
+    private bool _completed;
+    private List<Quest> _prerequisteQuests;
+    private Dictionary<SkillType, int> _prerequisteSkills;
+    private ObservableCollection<Requirements> _requirements;
 
     public string Name
     {
-      get { return _Name; }
+      get => _name;
       set
       {
-        _Name = value;
+        _name = value;
         RaisePropertyChanged();
       }
     }
 
     public bool Completed
     {
-      get { return _Completed; }
+      get => _completed;
       set
       {
-        _Completed = value;
+        _completed = value;
         RaisePropertyChanged();
       }
     }
 
     public List<Quest> PrerequisteQuests
     {
-      get { return _PrerequisteQuests; }
+      get => _prerequisteQuests;
       set
       {
-        _PrerequisteQuests = value;
+        _prerequisteQuests = value;
         RaisePropertyChanged();
       }
     }
 
     public Dictionary<SkillType, int> PrerequisteSkills
     {
-      get { return _PrerequisteSkills; }
+      get => _prerequisteSkills;
       set
       {
-        _PrerequisteSkills = value;
+        _prerequisteSkills = value;
         RaisePropertyChanged();
       }
     }
 
     public ObservableCollection<Requirements> Requirements
     {
-      get { return _Requirements; }
+      get => _requirements;
       set
       {
-        _Requirements = value;
+        _requirements = value;
         RaisePropertyChanged();
       }
     }
   }
 
-  public class Requirements : BaseViewModel, INotifyPropertyChanged
+  public class Requirements : BaseViewModel
   {
-    private string _RequirementName = "";
-    private TextDecorationCollection _RequirementStatus;
+    private string _requirementName = "";
+    private TextDecorationCollection _requirementStatus;
 
     public string RequirementName
     {
-      get { return _RequirementName; }
+      get => _requirementName;
       set
       {
-        _RequirementName = value;
+        _requirementName = value;
         RaisePropertyChanged();
       }
     }
 
     public TextDecorationCollection RequirementStatus
     {
-      get { return _RequirementStatus; }
+      get => _requirementStatus;
       set
       {
-        _RequirementStatus = value;
+        _requirementStatus = value;
         RaisePropertyChanged();
       }
     }

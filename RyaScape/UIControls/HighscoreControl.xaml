@@ -22,7 +22,7 @@
             </Grid.RowDefinitions>
 
             <TextBlock Grid.Row="0" Text="{Binding Error}" Grid.ColumnSpan="2" Margin="5,0,0,0" VerticalAlignment="Center"/>
-            <TextBlock Grid.Row="0" TextAlignment="Right" Grid.ColumnSpan="2" VerticalAlignment="Center">
+            <TextBlock Grid.Row="0" TextAlignment="Right" Grid.ColumnSpan="2" Grid.Column="0" VerticalAlignment="Center">
                         <Run Text="Username: " />
             </TextBlock>
 

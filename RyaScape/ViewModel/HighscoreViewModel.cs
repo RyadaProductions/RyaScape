@@ -11,11 +11,11 @@ namespace RyaScape.ViewModel
   {
     private string _user;
     private string _error;
-    private MainViewModel _mainModel;
+    private readonly MainViewModel _mainModel;
 
     public string Username
     {
-      get { return _user; }
+      get => _user;
       set
       {
         _user = value;
@@ -25,7 +25,7 @@ namespace RyaScape.ViewModel
 
     public string Error
     {
-      get { return _error; }
+      get => _error;
       set
       {
         _error = value;
@@ -44,7 +44,7 @@ namespace RyaScape.ViewModel
 
     public async Task Load()
     {
-      var loader = new CSVLoader();
+      var loader = new CsvLoader();
       var info = await loader.ReadHighscore(Username);
 
       Username = info.Username;

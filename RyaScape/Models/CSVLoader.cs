@@ -8,18 +8,19 @@ using RyaScape.ViewModel;
 
 namespace RyaScape.Models
 {
-  public class CSVResult
+  public class CsvResult
   {
     public string Username { get; set; }
     public string Error { get; set; }
     public List<SkillLevelViewModel> Skills { get; } = new List<SkillLevelViewModel>();
   }
 
-  public class CSVLoader
+  public class CsvLoader
   {
-    public async Task<CSVResult> ReadHighscore(string username)
+    public async Task<CsvResult> ReadHighscore(string username)
     {
-      var result = new CSVResult {
+      var result = new CsvResult
+      {
         Username = username
       };
 
@@ -27,7 +28,7 @@ namespace RyaScape.Models
       {
         result.Error = "Please enter a valid username."; return result;
       }
-      
+
       try
       {
         using (var client = new WebClient())
@@ -63,7 +64,7 @@ namespace RyaScape.Models
       {
         var errorResponse = wex.Response as HttpWebResponse;
 
-        if (errorResponse.StatusCode == HttpStatusCode.NotFound)
+        if (errorResponse != null && errorResponse.StatusCode == HttpStatusCode.NotFound)
         {
           result.Error = $"404: {username} not found.";
         }
@@ -81,14 +82,15 @@ namespace RyaScape.Models
       if (!typeof(T).IsEnum)
         throw new ArgumentException("T must be an enumerated type");
 
-      return Enum.GetValues(typeof(T)).Cast<T>().ToArray<T>();
+      return Enum.GetValues(typeof(T)).Cast<T>().ToArray();
     }
 
-    private static void FillStats(CSVResult highscore)
+    private static void FillStats(CsvResult highscore)
     {
       foreach (var skill in EnumToArray<SkillType>())
       {
-        highscore.Skills.Add(new SkillLevelViewModel() {
+        highscore.Skills.Add(new SkillLevelViewModel()
+        {
           Skill = skill.ToString(),
           Level = PlayerStats.Player[skill].Level,
           Rank = PlayerStats.Player[skill].Rank,

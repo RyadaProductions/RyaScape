@@ -6,7 +6,8 @@ namespace RyaScape.Models
   {
     public static string PlayerName = "";
 
-    public static Dictionary<SkillType, Skill> Player = new Dictionary<SkillType, Skill>() {
+    public static Dictionary<SkillType, Skill> Player = new Dictionary<SkillType, Skill>
+    {
       [SkillType.Total] = new Skill(),
       [SkillType.Attack] = new Skill(),
       [SkillType.Defence] = new Skill(),

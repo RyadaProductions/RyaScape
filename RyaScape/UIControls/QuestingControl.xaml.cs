@@ -1,29 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
+﻿using System.Windows.Controls;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace RyaScape.UIControls {
   /// <summary>
   /// Interaction logic for QuestingControl.xaml
   /// </summary>
-  public partial class QuestingControl : UserControl {
+  public partial class QuestingControl
+  {
     public QuestingControl() {
       InitializeComponent();
     }
 
-    private void DataGrid_MouseDown(object sender, MouseButtonEventArgs e) {
-      (sender as DataGrid).SelectedItem = null;
+    private void DataGrid_MouseDown(object sender, MouseButtonEventArgs e)
+    {
+      var dataGrid = sender as DataGrid;
+      if (dataGrid != null) dataGrid.SelectedItem = null;
     }
   }
 }

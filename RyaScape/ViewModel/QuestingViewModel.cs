@@ -9,18 +9,20 @@ using Newtonsoft.Json;
 using System;
 using System.IO;
 
-namespace RyaScape.ViewModel {
-  public class QuestingViewModel : BaseViewModel {
+namespace RyaScape.ViewModel
+{
+  public class QuestingViewModel : BaseViewModel
+  {
     public ObservableCollection<QuestViewModel> QuestList { get; } = new ObservableCollection<QuestViewModel>();
     public ObservableCollection<string> Profiles { get; } = new ObservableCollection<string>();
-    private string _CurrentProfile;
+    private string _currentProfile;
 
     public string CurrentProfile
     {
-      get { return _CurrentProfile; }
+      get => _currentProfile;
       set
       {
-        _CurrentProfile = value;
+        _currentProfile = value;
         RaisePropertyChanged();
       }
     }
@@ -30,37 +32,45 @@ namespace RyaScape.ViewModel {
       Load();
     }
 
-    public void Update(object sender, PropertyChangedEventArgs e) {
-      foreach (var Questvm in QuestList)
+    public void Update(object sender, PropertyChangedEventArgs e)
+    {
+      foreach (var questvm in QuestList)
       {
-        Questvm.Requirements.Clear();
+        questvm.Requirements.Clear();
 
-        foreach (var skill in Questvm.PrerequisteSkills)
+        foreach (var skill in questvm.PrerequisteSkills)
         {
-          Requirements req = new Requirements();
+          var req = new Requirements
+          {
+            RequirementName = skill.Value + " " + skill.Key,
+            RequirementStatus = PlayerStats.Player[skill.Key].Level >= skill.Value
+              ? TextDecorations.Strikethrough
+              : null
+          };
 
-          req.RequirementName = skill.Value.ToString() + " " + skill.Key.ToString();
-          req.RequirementStatus = PlayerStats.Player[skill.Key].Level >= skill.Value ? TextDecorations.Strikethrough : null;
 
-          Questvm.Requirements.Add(req);
+          questvm.Requirements.Add(req);
         }
 
-        if (Questvm.PrerequisteQuests.Count > 0)
+        if (questvm.PrerequisteQuests.Count > 0)
         {
-          Requirements req = new Requirements();
-          Questvm.Requirements.Add(req);
+          var req = new Requirements();
+          questvm.Requirements.Add(req);
         }
 
-        foreach (var quest in Questvm.PrerequisteQuests)
+        foreach (var quest in questvm.PrerequisteQuests)
         {
           var tmpQuest = QuestList.FirstOrDefault(x => x.Name == quest.Name);
 
-          Requirements req = new Requirements();
+          var req = new Requirements();
 
-          req.RequirementName = tmpQuest.Name;
-          req.RequirementStatus = tmpQuest.Completed == true ? TextDecorations.Strikethrough : null;
+          if (tmpQuest != null)
+          {
+            req.RequirementName = tmpQuest.Name;
+            req.RequirementStatus = tmpQuest.Completed ? TextDecorations.Strikethrough : null;
+          }
 
-          Questvm.Requirements.Add(req);
+          questvm.Requirements.Add(req);
         }
       }
       SaveCompleted();
@@ -69,46 +79,52 @@ namespace RyaScape.ViewModel {
     public void Load()
     {
       var loader = new Quests();
-      Dictionary<string, Quest> tempquestList = loader.GetQuests();
+      var tempquestList = loader.GetQuests();
 
       LoadProfiles();
 
-      List<string> completedQuests = new List<string>();
+      var completedQuests = new List<string>();
       if (File.Exists(Environment.CurrentDirectory + $"\\Resources\\Profiles\\{CurrentProfile}Completed.json"))
       {
-        string input = File.ReadAllText(Environment.CurrentDirectory + $"\\Resources\\Profiles\\{CurrentProfile}Completed.json");
+        var input = File.ReadAllText(Environment.CurrentDirectory + $"\\Resources\\Profiles\\{CurrentProfile}Completed.json");
         var desList = JsonConvert.DeserializeObject<List<string>>(input);
         completedQuests.AddRange(desList);
       }
 
       foreach (var quest in tempquestList)
       {
-        ObservableCollection<Requirements> Questrequirements = new ObservableCollection<Requirements>();
+        var questrequirements = new ObservableCollection<Requirements>();
 
         foreach (var skill in quest.Value.PrerequisteSkills)
         {
-          Requirements req = new Requirements();
+          var req = new Requirements
+          {
+            RequirementName = skill.Value + " " + skill.Key,
+            RequirementStatus = PlayerStats.Player[skill.Key].Level >= skill.Value
+              ? TextDecorations.Strikethrough
+              : null
+          };
 
-          req.RequirementName = skill.Value.ToString() + " " + skill.Key.ToString();
-          req.RequirementStatus = PlayerStats.Player[skill.Key].Level >= skill.Value ? TextDecorations.Strikethrough : null;
 
-          Questrequirements.Add(req);
+          questrequirements.Add(req);
         }
 
         if (quest.Value.PrerequisteQuests.Count > 0)
         {
-          Requirements req = new Requirements();
-          Questrequirements.Add(req);
+          var req = new Requirements();
+          questrequirements.Add(req);
         }
 
         foreach (var quests in quest.Value.PrerequisteQuests)
         {
-          Requirements req = new Requirements();
+          var req = new Requirements
+          {
+            RequirementName = quests.Name,
+            RequirementStatus = quests.Completed ? TextDecorations.Strikethrough : null
+          };
 
-          req.RequirementName = quests.Name;
-          req.RequirementStatus = quests.Completed == true ? TextDecorations.Strikethrough : null;
 
-          Questrequirements.Add(req);
+          questrequirements.Add(req);
         }
 
         //Check if the quest has been saved as completed
@@ -117,15 +133,15 @@ namespace RyaScape.ViewModel {
           quest.Value.Completed = true;
         }
 
-        QuestViewModel newQuest = new QuestViewModel 
+        var newQuest = new QuestViewModel
         {
           Name = quest.Value.Name,
           Completed = quest.Value.Completed,
           PrerequisteQuests = quest.Value.PrerequisteQuests,
           PrerequisteSkills = quest.Value.PrerequisteSkills,
-          Requirements = Questrequirements
+          Requirements = questrequirements
         };
-        newQuest.PropertyChanged += new PropertyChangedEventHandler(Update);
+        newQuest.PropertyChanged += Update;
 
         QuestList.Add(newQuest);
       }
@@ -134,24 +150,17 @@ namespace RyaScape.ViewModel {
     //Save the completed quest list to disk
     private void SaveCompleted()
     {
-      List<string> completedQuests = new List<string>();
-      foreach (QuestViewModel x in QuestList)
-      {
-        if (x.Completed == true)
-        {
-          completedQuests.Add(x.Name);
-        }
-      }
-      string json = JsonConvert.SerializeObject(completedQuests);
+      var completedQuests = (from x in QuestList where x.Completed select x.Name).ToList();
+      var json = JsonConvert.SerializeObject(completedQuests);
       File.WriteAllText(Environment.CurrentDirectory + $"\\Resources\\Profiles\\{CurrentProfile}Completed.json", json);
     }
 
     private void LoadProfiles()
     {
-      string[] fileEntries = Directory.GetFiles(Environment.CurrentDirectory + "\\Resources\\Profiles");
-      foreach (string file in fileEntries)
+      var fileEntries = Directory.GetFiles(Environment.CurrentDirectory + "\\Resources\\Profiles");
+      foreach (var file in fileEntries)
       {
-        string lProfile = file.Substring(file.LastIndexOf("\\") + 1);
+        var lProfile = file.Substring(file.LastIndexOf("\\", StringComparison.Ordinal) + 1);
         Profiles.Add(lProfile.Replace("Completed.json", ""));
       }
       CurrentProfile = Profiles[0];

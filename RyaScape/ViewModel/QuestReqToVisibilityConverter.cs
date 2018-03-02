@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Globalization;
 using System.Windows;
@@ -13,7 +12,7 @@ namespace RyaScape.ViewModel
     public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
     {
       var temp = value as ObservableCollection<Requirements>;
-      return temp.Count == 0 ? Visibility.Collapsed : Visibility.Visible;
+      return temp != null && temp.Count == 0 ? Visibility.Collapsed : Visibility.Visible;
     }
 
     public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

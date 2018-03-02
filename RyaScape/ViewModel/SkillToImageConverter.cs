@@ -6,13 +6,14 @@ using System.Windows.Markup;
 
 namespace RyaScape.ViewModel
 {
-  class SkillToImageConverter : MarkupExtension, IValueConverter
+  internal class SkillToImageConverter : MarkupExtension, IValueConverter
   {
     public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
     {
+      if (value == null) return "";
       var attachmentType = (SkillType)Enum.Parse(typeof(SkillType), value.ToString());
 
-      return string.Format("/RyaScape;component/Resources/07skill-icons/{0}-icon.png", attachmentType);
+      return $"/RyaScape;component/Resources/07skill-icons/{attachmentType}-icon.png";
     }
 
     public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
