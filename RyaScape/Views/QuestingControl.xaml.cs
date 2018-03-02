@@ -1,7 +1,7 @@
 ﻿using System.Windows.Controls;
 using System.Windows.Input;
 
-namespace RyaScape.UIControls {
+namespace RyaScape.Views {
   /// <summary>
   /// Interaction logic for QuestingControl.xaml
   /// </summary>

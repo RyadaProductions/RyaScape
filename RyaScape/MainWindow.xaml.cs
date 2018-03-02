@@ -1,4 +1,4 @@
-﻿using RyaScape.ViewModel;
+﻿using RyaScape.ViewModels;
 
 namespace RyaScape {
   /// <summary>

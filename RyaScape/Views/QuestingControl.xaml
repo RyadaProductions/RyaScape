@@ -1,10 +1,11 @@
-﻿<UserControl x:Class="RyaScape.UIControls.QuestingControl"
+﻿<UserControl x:Class="RyaScape.Views.QuestingControl"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-             xmlns:viewModel="clr-namespace:RyaScape.ViewModel"
+             xmlns:viewModel="clr-namespace:RyaScape.ViewModels"
+             xmlns:converters="clr-namespace:RyaScape.Converters"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300" d:DataContext="{d:DesignInstance viewModel:QuestingViewModel}">
 
@@ -44,7 +45,7 @@
         </DataGrid.Columns>
         <DataGrid.RowDetailsTemplate>
           <DataTemplate>
-            <ItemsControl ItemsSource="{Binding Requirements}" Margin="10,10,0,10" Visibility="{Binding Requirements, Converter={viewModel:QuestReqToVisibilityConverter}}">
+            <ItemsControl ItemsSource="{Binding Requirements}" Margin="10,10,0,10" Visibility="{Binding Requirements, Converter={converters:QuestReqToVisibilityConverter}}">
               <ItemsControl.ItemTemplate>
                 <DataTemplate>
                   <TextBlock Text="{Binding RequirementName}" TextDecorations="{Binding RequirementStatus}"/>

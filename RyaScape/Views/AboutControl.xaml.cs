@@ -1,6 +1,6 @@
 ﻿using System.Windows.Navigation;
 
-namespace RyaScape.UIControls {
+namespace RyaScape.Views {
   /// <summary>
   /// Interaction logic for AboutControl.xaml
   /// </summary>

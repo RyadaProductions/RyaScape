@@ -9,7 +9,7 @@ using Newtonsoft.Json;
 using System;
 using System.IO;
 
-namespace RyaScape.ViewModel
+namespace RyaScape.ViewModels
 {
   public class QuestingViewModel : BaseViewModel
   {

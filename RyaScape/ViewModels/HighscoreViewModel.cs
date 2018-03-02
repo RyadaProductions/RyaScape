@@ -5,7 +5,7 @@ using NanoMVVM.Commands;
 using NanoMVVM.ViewModels;
 using RyaScape.Models;
 
-namespace RyaScape.ViewModel
+namespace RyaScape.ViewModels
 {
   public class HighscoreViewModel : BaseViewModel
   {

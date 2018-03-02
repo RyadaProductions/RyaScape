@@ -1,4 +1,4 @@
-﻿namespace RyaScape.UIControls {
+﻿namespace RyaScape.Views {
   /// <summary>
   /// Interaction logic for HighscoreControl.xaml
   /// </summary>

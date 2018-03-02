@@ -1,6 +1,6 @@
 ﻿using NanoMVVM.ViewModels;
 
-namespace RyaScape.ViewModel
+namespace RyaScape.ViewModels
 {
   public class SkillLevelViewModel : BaseViewModel
   {

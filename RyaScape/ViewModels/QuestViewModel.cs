@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Windows;
 
-namespace RyaScape.ViewModel
+namespace RyaScape.ViewModels
 {
   public class QuestViewModel : BaseViewModel
   {

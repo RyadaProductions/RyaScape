@@ -1,23 +1,24 @@
-﻿using System;
-using System.Collections.ObjectModel;
+﻿using RyaScape.Models;
+using System;
 using System.Globalization;
-using System.Windows;
 using System.Windows.Data;
 using System.Windows.Markup;
 
-namespace RyaScape.ViewModel
+namespace RyaScape.Converters
 {
-  public sealed class QuestReqToVisibilityConverter : MarkupExtension, IValueConverter
+  internal class SkillToImageConverter : MarkupExtension, IValueConverter
   {
     public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
     {
-      var temp = value as ObservableCollection<Requirements>;
-      return temp != null && temp.Count == 0 ? Visibility.Collapsed : Visibility.Visible;
+      if (value == null) return "";
+      var attachmentType = (SkillType)Enum.Parse(typeof(SkillType), value.ToString());
+
+      return $"/RyaScape;component/Resources/07skill-icons/{attachmentType}-icon.png";
     }
 
     public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
     {
-      throw new NotImplementedException();
+      throw new NotSupportedException();
     }
 
     public override object ProvideValue(IServiceProvider serviceProvider)
