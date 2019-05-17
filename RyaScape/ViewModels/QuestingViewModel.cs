@@ -13,7 +13,7 @@ namespace RyaScape.ViewModels
 {
     public class QuestingViewModel : BaseViewModel
     {
-        public ObservableDictionary<SkillType, SkillLevelViewModel> Skills { get; }
+        public Dictionary<SkillType, SkillLevelViewModel> Skills { get; }
         public ObservableCollection<QuestViewModel> QuestList { get; } = new ObservableCollection<QuestViewModel>();
         public ObservableCollection<string> Profiles { get; } = new ObservableCollection<string>();
         private string _currentProfile;
@@ -24,7 +24,7 @@ namespace RyaScape.ViewModels
             set => SetAndNotify(ref _currentProfile, value);
         }
 
-        public QuestingViewModel(ObservableDictionary<SkillType, SkillLevelViewModel> skills)
+        public QuestingViewModel(Dictionary<SkillType, SkillLevelViewModel> skills)
         {
             Skills = skills;
             Load();

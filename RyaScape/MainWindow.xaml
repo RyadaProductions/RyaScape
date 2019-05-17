@@ -25,7 +25,7 @@
                     <views:QuestingControl DataContext="{Binding QuestingModel}"/>
                 </TabItem>
                 <TabItem Header="About">
-                    <views:AboutControl DataContext="{Binding}"/>
+                    <views:AboutControl/>
                 </TabItem>
             </dragablz:TabablzControl>
         </DockPanel>

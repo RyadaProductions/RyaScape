@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Runtime.CompilerServices;
 
 namespace RyaScape.Mvvm
@@ -19,6 +20,8 @@ namespace RyaScape.Mvvm
         protected virtual bool SetAndNotify<T>(ref T field, T value, [CallerMemberName] string propertyName = "")
         {
             if (EqualityComparer<T>.Default.Equals(field, value)) return false;
+
+            Debug.WriteLine($"Setting value of property: {propertyName} to {value}, previous value: {field}");
 
             field = value;
             OnPropertyChanged(propertyName);

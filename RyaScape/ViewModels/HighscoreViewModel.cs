@@ -4,6 +4,7 @@ using System.Windows.Input;
 using RyaScape.Mvvm;
 using RyaScape.Models;
 using System.Linq;
+using System.Collections.Generic;
 
 namespace RyaScape.ViewModels
 {
@@ -29,7 +30,7 @@ namespace RyaScape.ViewModels
         public async Task Load()
         {
             await new HighscoreLoader().ReadHighscore(Highscore);
-            
+
             _mainModel.QuestingModel.Update(string.Empty, new System.ComponentModel.PropertyChangedEventArgs(string.Empty));
         }
     }

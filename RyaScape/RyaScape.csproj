@@ -82,7 +82,6 @@
     <Compile Include="Mvvm\AwaitableDelegateCommand.cs" />
     <Compile Include="Mvvm\BaseViewModel.cs" />
     <Compile Include="Mvvm\DelegateCommand.cs" />
-    <Compile Include="Mvvm\ObservableDictionary.cs" />
     <Compile Include="ViewModels\Requirements.cs" />
     <Compile Include="Views\AboutControl.xaml.cs">
       <DependentUpon>AboutControl.xaml</DependentUpon>
@@ -93,7 +92,6 @@
     <Compile Include="Views\QuestingControl.xaml.cs">
       <DependentUpon>QuestingControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ViewModels\AboutViewModel.cs" />
     <Compile Include="ViewModels\HighscoreViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="ViewModels\QuestingViewModel.cs" />

@@ -7,8 +7,8 @@ namespace RyaScape.Models
 {
     public class HighscoreResult : BaseViewModel
     {
-        private string _username;
-        private string _error;
+        private string _username = string.Empty;
+        private string _error = string.Empty;
 
         public string Username {
             get => _username;
@@ -20,11 +20,11 @@ namespace RyaScape.Models
             set => SetAndNotify(ref _error, value);
         }
 
-        public ObservableDictionary<SkillType, SkillLevelViewModel> Skills { get; }
+        public Dictionary<SkillType, SkillLevelViewModel> Skills { get; }
 
         public HighscoreResult()
         {
-            Skills = new ObservableDictionary<SkillType, SkillLevelViewModel>()
+            Skills = new Dictionary<SkillType, SkillLevelViewModel>()
             {
                 [SkillType.Total] = new SkillLevelViewModel(SkillType.Total),
                 [SkillType.Attack] = new SkillLevelViewModel(SkillType.Attack),
