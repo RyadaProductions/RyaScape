@@ -8,22 +8,22 @@ using System.Windows.Markup;
 
 namespace RyaScape.Converters
 {
-  public sealed class QuestReqToVisibilityConverter : MarkupExtension, IValueConverter
-  {
-    public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+    public sealed class QuestReqToVisibilityConverter : MarkupExtension, IValueConverter
     {
-      var temp = value as ObservableCollection<Requirements>;
-      return temp != null && temp.Count == 0 ? Visibility.Collapsed : Visibility.Visible;
-    }
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            var temp = value as ObservableCollection<Requirements>;
+            return temp != null && temp.Count == 0 ? Visibility.Collapsed : Visibility.Visible;
+        }
 
-    public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-    {
-      throw new NotImplementedException();
-    }
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
 
-    public override object ProvideValue(IServiceProvider serviceProvider)
-    {
-      return this;
+        public override object ProvideValue(IServiceProvider serviceProvider)
+        {
+            return this;
+        }
     }
-  }
 }

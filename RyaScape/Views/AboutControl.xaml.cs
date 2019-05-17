@@ -1,17 +1,20 @@
 ﻿using System.Windows.Navigation;
 
-namespace RyaScape.Views {
-  /// <summary>
-  /// Interaction logic for AboutControl.xaml
-  /// </summary>
-  public partial class AboutControl
-  {
-    public AboutControl() {
-      InitializeComponent();
-    }
+namespace RyaScape.Views
+{
+    /// <summary>
+    /// Interaction logic for AboutControl.xaml
+    /// </summary>
+    public partial class AboutControl
+    {
+        public AboutControl()
+        {
+            InitializeComponent();
+        }
 
-    private void Hyperlink_RequestNavigate(object sender, RequestNavigateEventArgs e) {
-      System.Diagnostics.Process.Start(e.Uri.ToString());
+        private void Hyperlink_RequestNavigate(object sender, RequestNavigateEventArgs e)
+        {
+            System.Diagnostics.Process.Start(e.Uri.ToString());
+        }
     }
-  }
 }

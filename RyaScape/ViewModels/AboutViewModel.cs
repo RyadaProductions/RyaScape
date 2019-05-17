@@ -2,8 +2,8 @@
 
 namespace RyaScape.ViewModels
 {
-  internal class AboutViewModel : BaseViewModel
-  {
+    internal class AboutViewModel : BaseViewModel
+    {
 
-  }
+    }
 }
