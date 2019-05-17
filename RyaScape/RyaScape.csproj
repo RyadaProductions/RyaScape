@@ -74,12 +74,15 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Models\HighscoreResult.cs" />
+    <Compile Include="Models\Quest.cs" />
     <Compile Include="Models\Quests.cs" />
-    <Compile Include="Models\CSVLoader.cs" />
+    <Compile Include="Models\HighscoreLoader.cs" />
     <Compile Include="Models\SkillType.cs" />
     <Compile Include="Mvvm\AwaitableDelegateCommand.cs" />
     <Compile Include="Mvvm\BaseViewModel.cs" />
     <Compile Include="Mvvm\DelegateCommand.cs" />
+    <Compile Include="Mvvm\ObservableDictionary.cs" />
     <Compile Include="ViewModels\Requirements.cs" />
     <Compile Include="Views\AboutControl.xaml.cs">
       <DependentUpon>AboutControl.xaml</DependentUpon>

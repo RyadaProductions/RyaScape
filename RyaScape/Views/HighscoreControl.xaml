@@ -7,7 +7,7 @@
              xmlns:viewModel="clr-namespace:RyaScape.ViewModels"
              xmlns:converters="clr-namespace:RyaScape.Converters"
              mc:Ignorable="d" 
-             d:DesignHeight="350" d:DesignWidth="550" d:DataContext="{d:DesignInstance viewModel:HighscoreViewModel, IsDesignTimeCreatable=False}">
+             d:DesignHeight="350" d:DesignWidth="550" d:DataContext="{d:DesignInstance viewModel:HighscoreViewModel}">
     <materialDesign:ColorZone Mode="Dark">
         <Grid Margin="0,10,0,0">
             <Grid.ColumnDefinitions>
@@ -22,31 +22,31 @@
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
 
-            <TextBlock Grid.Row="0" Text="{Binding Error}" Grid.ColumnSpan="2" Margin="5,0,0,0" VerticalAlignment="Center"/>
+            <TextBlock Grid.Row="0" Text="{Binding Highscore.Error}" Grid.ColumnSpan="2" Margin="5,0,0,0" VerticalAlignment="Center"/>
             <TextBlock Grid.Row="0" TextAlignment="Right" Grid.ColumnSpan="2" Grid.Column="0" VerticalAlignment="Center">
                         <Run Text="Username: " />
             </TextBlock>
 
-            <TextBox Grid.Row="0" Grid.Column="2" Text="{Binding Username, UpdateSourceTrigger=PropertyChanged}" MaxLength="12" Margin="0,0,10,0"/>
+            <TextBox Grid.Row="0" Grid.Column="2" Text="{Binding Highscore.Username, UpdateSourceTrigger=PropertyChanged}" MaxLength="12" Margin="0,0,10,0"/>
 
-            <Button Grid.Row="0" Grid.Column="3" Content="Lookup" Command="{Binding LoadCommand}" Margin="0,0,5,0" Height="24" IsDefault="True"></Button>
+            <Button Grid.Row="0" Grid.Column="3" Content="Lookup" Command="{Binding LoadCommand}" Margin="0,0,5,0" Height="24" IsDefault="True" />
 
-            <DataGrid Grid.Row="1" Grid.ColumnSpan="4" Grid.Column="0" ItemsSource="{Binding Skills}" AutoGenerateColumns="False" CanUserAddRows="False" CanUserDeleteRows="False" CanUserResizeRows="False">
+            <DataGrid Grid.Row="1" Grid.ColumnSpan="4" Grid.Column="0" ItemsSource="{Binding Highscore.Skills.Values}" AutoGenerateColumns="False" CanUserAddRows="False" CanUserDeleteRows="False" CanUserResizeRows="False">
 
                 <DataGrid.Columns>
                     <DataGridTemplateColumn>
 
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
-                                <Image Source="{Binding Skill, Converter={converters:SkillToImageConverter}}" Height="20" Width="20" />
+                                <Image Source="{Binding Path=Skill, Converter={converters:SkillToImageConverter}}" Height="20" Width="20" />
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
 
                     </DataGridTemplateColumn>
-                    <DataGridTextColumn Binding="{Binding Skill}" Header="Skill" Width="4*" />
-                    <DataGridTextColumn Binding="{Binding Rank}" Header="Rank" Width="2*" />
-                    <DataGridTextColumn Binding="{Binding Level}" Header="Level" Width="1.5*" />
-                    <DataGridTextColumn Binding="{Binding Xp}" Header="Xp" Width="2*" />
+                    <DataGridTextColumn Binding="{Binding Path=Skill}" Header="Skill" Width="4*" />
+                    <DataGridTextColumn Binding="{Binding Path=Rank}" Header="Rank" Width="2*" />
+                    <DataGridTextColumn Binding="{Binding Path=Level}" Header="Level" Width="1.5*" />
+                    <DataGridTextColumn Binding="{Binding Path=Xp}" Header="Xp" Width="2*" />
                 </DataGrid.Columns>
 
             </DataGrid>

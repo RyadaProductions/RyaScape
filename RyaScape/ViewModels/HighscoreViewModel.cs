@@ -3,49 +3,33 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using RyaScape.Mvvm;
 using RyaScape.Models;
+using System.Linq;
 
 namespace RyaScape.ViewModels
 {
     public class HighscoreViewModel : BaseViewModel
     {
-        private string _user;
-        private string _error;
         private readonly MainViewModel _mainModel;
+        private HighscoreResult _highscore;
 
-        public string Username
+        public HighscoreResult Highscore
         {
-            get => _user;
-            set => SetAndNotify(ref _user, value);
+            get => _highscore;
+            set => SetAndNotify(ref _highscore, value);
         }
-
-        public string Error
-        {
-            get => _error;
-            set => SetAndNotify(ref _error, value);
-        }
-
-        public ObservableCollection<SkillLevelViewModel> Skills { get; } = new ObservableCollection<SkillLevelViewModel>();
 
         public ICommand LoadCommand => new AwaitableDelegateCommand(Load);
 
         public HighscoreViewModel(MainViewModel mainModel)
         {
             _mainModel = mainModel;
+            Highscore = new HighscoreResult();
         }
 
         public async Task Load()
         {
-            var loader = new CsvLoader();
-            var info = await loader.ReadHighscore(Username);
-
-            Username = info.Username;
-            Error = info.Error;
-
-            Skills.Clear();
-            foreach (var s in info.Skills)
-                Skills.Add(s);
-
-            _mainModel.QuestingModel.Skills = info.Skills;
+            await new HighscoreLoader().ReadHighscore(Highscore);
+            
             _mainModel.QuestingModel.Update(string.Empty, new System.ComponentModel.PropertyChangedEventArgs(string.Empty));
         }
     }

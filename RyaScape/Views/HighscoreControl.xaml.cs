@@ -5,8 +5,6 @@
     /// </summary>
     public partial class HighscoreControl
     {
-
-
         public HighscoreControl()
         {
             InitializeComponent();

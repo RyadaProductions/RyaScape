@@ -13,7 +13,7 @@ namespace RyaScape.ViewModels
 {
     public class QuestingViewModel : BaseViewModel
     {
-        public List<SkillLevelViewModel> Skills { get; set; } = new List<SkillLevelViewModel>();
+        public ObservableDictionary<SkillType, SkillLevelViewModel> Skills { get; }
         public ObservableCollection<QuestViewModel> QuestList { get; } = new ObservableCollection<QuestViewModel>();
         public ObservableCollection<string> Profiles { get; } = new ObservableCollection<string>();
         private string _currentProfile;
@@ -24,8 +24,9 @@ namespace RyaScape.ViewModels
             set => SetAndNotify(ref _currentProfile, value);
         }
 
-        public QuestingViewModel()
+        public QuestingViewModel(ObservableDictionary<SkillType, SkillLevelViewModel> skills)
         {
+            Skills = skills;
             Load();
         }
 
@@ -40,7 +41,7 @@ namespace RyaScape.ViewModels
                     var req = new Requirements
                     {
                         RequirementName = skill.Value + " " + skill.Key,
-                        RequirementStatus = Skills.FirstOrDefault(x => x.Skill == skill.Key.ToString())?.Level >= skill.Value
+                        RequirementStatus = Skills[skill.Key].Level >= skill.Value
                         ? TextDecorations.Strikethrough
                         : null
                     };
@@ -75,7 +76,7 @@ namespace RyaScape.ViewModels
         public void Load()
         {
             var loader = new Quests();
-            var tempquestList = loader.GetQuests();
+            var tempquestList = loader.LoadQuests();
 
             LoadProfiles();
 
@@ -96,7 +97,7 @@ namespace RyaScape.ViewModels
                     var req = new Requirements
                     {
                         RequirementName = skill.Value + " " + skill.Key,
-                        RequirementStatus = Skills.FirstOrDefault(x => x.Skill == skill.Key.ToString())?.Level >= skill.Value
+                        RequirementStatus = Skills[skill.Key]?.Level >= skill.Value
                         ? TextDecorations.Strikethrough
                         : null
                     };

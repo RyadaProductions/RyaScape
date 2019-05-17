@@ -10,7 +10,7 @@ namespace RyaScape.ViewModels
         public MainViewModel()
         {
             HighscoreModel = new HighscoreViewModel(this);
-            QuestingModel = new QuestingViewModel();
+            QuestingModel = new QuestingViewModel(HighscoreModel.Highscore.Skills);
         }
     }
 }
