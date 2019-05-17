@@ -1,4 +1,4 @@
-﻿using NanoMVVM.ViewModels;
+﻿using RyaScape.Mvvm;
 
 namespace RyaScape.ViewModels
 {

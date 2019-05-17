@@ -1,4 +1,4 @@
-﻿using NanoMVVM.ViewModels;
+﻿using RyaScape.Mvvm;
 using RyaScape.Models;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -17,77 +17,31 @@ namespace RyaScape.ViewModels
         public string Name
         {
             get => _name;
-            set
-            {
-                _name = value;
-                RaisePropertyChanged();
-            }
+            set => SetAndNotify(ref _name, value);
         }
 
         public bool Completed
         {
             get => _completed;
-            set
-            {
-                _completed = value;
-                RaisePropertyChanged();
-            }
+            set => SetAndNotify(ref _completed, value);
         }
 
         public List<Quest> PrerequisteQuests
         {
             get => _prerequisteQuests;
-            set
-            {
-                _prerequisteQuests = value;
-                RaisePropertyChanged();
-            }
+            set => SetAndNotify(ref _prerequisteQuests, value);
         }
 
         public Dictionary<SkillType, int> PrerequisteSkills
         {
             get => _prerequisteSkills;
-            set
-            {
-                _prerequisteSkills = value;
-                RaisePropertyChanged();
-            }
+            set => SetAndNotify(ref _prerequisteSkills, value);
         }
 
         public ObservableCollection<Requirements> Requirements
         {
             get => _requirements;
-            set
-            {
-                _requirements = value;
-                RaisePropertyChanged();
-            }
-        }
-    }
-
-    public class Requirements : BaseViewModel
-    {
-        private string _requirementName = "";
-        private TextDecorationCollection _requirementStatus;
-
-        public string RequirementName
-        {
-            get => _requirementName;
-            set
-            {
-                _requirementName = value;
-                RaisePropertyChanged();
-            }
-        }
-
-        public TextDecorationCollection RequirementStatus
-        {
-            get => _requirementStatus;
-            set
-            {
-                _requirementStatus = value;
-                RaisePropertyChanged();
-            }
+            set => SetAndNotify(ref _requirements, value);
         }
     }
 }

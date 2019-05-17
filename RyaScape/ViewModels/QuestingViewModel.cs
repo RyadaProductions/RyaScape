@@ -1,4 +1,4 @@
-﻿using NanoMVVM.ViewModels;
+﻿using RyaScape.Mvvm;
 using RyaScape.Models;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -20,11 +20,7 @@ namespace RyaScape.ViewModels
         public string CurrentProfile
         {
             get => _currentProfile;
-            set
-            {
-                _currentProfile = value;
-                RaisePropertyChanged();
-            }
+            set => SetAndNotify(ref _currentProfile, value);
         }
 
         public QuestingViewModel()
@@ -161,7 +157,7 @@ namespace RyaScape.ViewModels
             foreach (var file in fileEntries)
             {
                 var lProfile = file.Substring(file.LastIndexOf("\\", StringComparison.Ordinal) + 1);
-                Profiles.Add(lProfile.Replace("Completed.json", ""));
+                Profiles.Add(lProfile.Replace("Completed.json", string.Empty));
             }
             CurrentProfile = Profiles[0];
         }

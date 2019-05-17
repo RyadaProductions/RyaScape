@@ -1,4 +1,4 @@
-﻿using NanoMVVM.ViewModels;
+﻿using RyaScape.Mvvm;
 
 namespace RyaScape.ViewModels
 {
@@ -12,41 +12,25 @@ namespace RyaScape.ViewModels
         public string Skill
         {
             get => _skill;
-            set
-            {
-                _skill = value;
-                RaisePropertyChanged();
-            }
+            set => SetAndNotify(ref _skill, value);
         }
 
         public long Rank
         {
             get => _rank;
-            set
-            {
-                _rank = value;
-                RaisePropertyChanged();
-            }
+            set => SetAndNotify(ref _rank, value);
         }
 
         public long Level
         {
             get => _level;
-            set
-            {
-                _level = value;
-                RaisePropertyChanged();
-            }
+            set => SetAndNotify(ref _level, value);
         }
 
         public long Xp
         {
             get => _xp;
-            set
-            {
-                _xp = value;
-                RaisePropertyChanged();
-            }
+            set => SetAndNotify(ref _xp, value);
         }
     }
 }

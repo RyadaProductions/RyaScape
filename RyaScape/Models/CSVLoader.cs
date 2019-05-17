@@ -25,7 +25,7 @@ namespace RyaScape.Models
                 Username = username
             };
 
-            if (username == "")
+            if (string.IsNullOrWhiteSpace(username))
             {
                 result.Error = "Please enter a valid username.";
                 return result;

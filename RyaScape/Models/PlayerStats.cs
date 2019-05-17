@@ -4,7 +4,7 @@ namespace RyaScape.Models
 {
     public static class PlayerStats
     {
-        public static string PlayerName = "";
+        public static string PlayerName = string.Empty;
 
         public static Dictionary<SkillType, Skill> Player = new Dictionary<SkillType, Skill>
         {

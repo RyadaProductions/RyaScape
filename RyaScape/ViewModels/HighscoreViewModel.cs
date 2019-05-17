@@ -1,8 +1,7 @@
 ﻿using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using System.Windows.Input;
-using NanoMVVM.Commands;
-using NanoMVVM.ViewModels;
+using RyaScape.Mvvm;
 using RyaScape.Models;
 
 namespace RyaScape.ViewModels
@@ -16,21 +15,13 @@ namespace RyaScape.ViewModels
         public string Username
         {
             get => _user;
-            set
-            {
-                _user = value;
-                RaisePropertyChanged();
-            }
+            set => SetAndNotify(ref _user, value);
         }
 
         public string Error
         {
             get => _error;
-            set
-            {
-                _error = value;
-                RaisePropertyChanged();
-            }
+            set => SetAndNotify(ref _error, value);
         }
 
         public ObservableCollection<SkillLevelViewModel> Skills { get; } = new ObservableCollection<SkillLevelViewModel>();
@@ -54,7 +45,7 @@ namespace RyaScape.ViewModels
             foreach (var s in info.Skills)
                 Skills.Add(s);
 
-            _mainModel.QuestingModel.Update("", new System.ComponentModel.PropertyChangedEventArgs(""));
+            _mainModel.QuestingModel.Update(string.Empty, new System.ComponentModel.PropertyChangedEventArgs(string.Empty));
         }
     }
 }
