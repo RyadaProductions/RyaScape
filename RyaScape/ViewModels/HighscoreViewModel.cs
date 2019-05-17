@@ -45,6 +45,7 @@ namespace RyaScape.ViewModels
             foreach (var s in info.Skills)
                 Skills.Add(s);
 
+            _mainModel.QuestingModel.Skills = info.Skills;
             _mainModel.QuestingModel.Update(string.Empty, new System.ComponentModel.PropertyChangedEventArgs(string.Empty));
         }
     }

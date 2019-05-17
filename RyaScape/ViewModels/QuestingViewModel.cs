@@ -13,6 +13,7 @@ namespace RyaScape.ViewModels
 {
     public class QuestingViewModel : BaseViewModel
     {
+        public List<SkillLevelViewModel> Skills { get; set; } = new List<SkillLevelViewModel>();
         public ObservableCollection<QuestViewModel> QuestList { get; } = new ObservableCollection<QuestViewModel>();
         public ObservableCollection<string> Profiles { get; } = new ObservableCollection<string>();
         private string _currentProfile;
@@ -39,11 +40,10 @@ namespace RyaScape.ViewModels
                     var req = new Requirements
                     {
                         RequirementName = skill.Value + " " + skill.Key,
-                        RequirementStatus = PlayerStats.Player[skill.Key].Level >= skill.Value
+                        RequirementStatus = Skills.FirstOrDefault(x => x.Skill == skill.Key.ToString())?.Level >= skill.Value
                         ? TextDecorations.Strikethrough
                         : null
                     };
-
 
                     questvm.Requirements.Add(req);
                 }
@@ -96,7 +96,7 @@ namespace RyaScape.ViewModels
                     var req = new Requirements
                     {
                         RequirementName = skill.Value + " " + skill.Key,
-                        RequirementStatus = PlayerStats.Player[skill.Key].Level >= skill.Value
+                        RequirementStatus = Skills.FirstOrDefault(x => x.Skill == skill.Key.ToString())?.Level >= skill.Value
                         ? TextDecorations.Strikethrough
                         : null
                     };

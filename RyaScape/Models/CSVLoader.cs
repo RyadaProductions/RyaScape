@@ -37,18 +37,23 @@ namespace RyaScape.Models
                 {
                     var data = await client.GetStringAsync($"http://services.runescape.com/m=hiscore_oldschool/index_lite.ws?player={username}");
 
-                    var line = data.Split('\n');
+                    var lines = data.Split('\n');
 
                     for (var i = 0; i < 24; i++)
                     {
                         var skill = (SkillType)i;
-                        var values = line[i].Split(',');
+                        var values = lines[i].Split(',');
 
                         try
                         {
-                            PlayerStats.Player[skill].Rank = long.Parse(values[0]);
-                            PlayerStats.Player[skill].Level = long.Parse(values[1]);
-                            PlayerStats.Player[skill].Exp = long.Parse(values[2]);
+                            var skillLevel = new SkillLevelViewModel()
+                            {
+                                Skill = skill.ToString(),
+                                Rank = long.Parse(values[0]),
+                                Level = long.Parse(values[1]),
+                                Xp = long.Parse(values[2])
+                            };
+                            result.Skills.Add(skillLevel);
                         }
                         catch (Exception ex)
                         {
@@ -56,15 +61,12 @@ namespace RyaScape.Models
                         }
                     }
                 }
-                PlayerStats.PlayerName = username;
-                FillStats(result);
                 result.Error = $"{username} loaded successfully.";
             }
             catch (WebException wex)
             {
-                var errorResponse = wex.Response as HttpWebResponse;
 
-                if (errorResponse != null && errorResponse.StatusCode == HttpStatusCode.NotFound)
+                if (wex.Response is HttpWebResponse errorResponse && errorResponse.StatusCode == HttpStatusCode.NotFound)
                 {
                     result.Error = $"404: {username} not found.";
                 }
@@ -75,28 +77,6 @@ namespace RyaScape.Models
             }
 
             return result;
-        }
-
-        private static T[] EnumToArray<T>() where T : struct, IConvertible
-        {
-            if (!typeof(T).IsEnum)
-                throw new ArgumentException("T must be an enumerated type");
-
-            return Enum.GetValues(typeof(T)).Cast<T>().ToArray();
-        }
-
-        private static void FillStats(CsvResult highscore)
-        {
-            foreach (var skill in EnumToArray<SkillType>())
-            {
-                highscore.Skills.Add(new SkillLevelViewModel()
-                {
-                    Skill = skill.ToString(),
-                    Level = PlayerStats.Player[skill].Level,
-                    Rank = PlayerStats.Player[skill].Rank,
-                    Xp = PlayerStats.Player[skill].Exp
-                });
-            }
         }
     }
 }
