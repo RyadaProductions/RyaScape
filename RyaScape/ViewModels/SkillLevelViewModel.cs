@@ -9,7 +9,7 @@ namespace RyaScape.ViewModels
         private long _level;
         private long _xp;
 
-        public SkillLevelViewModel(SkillType skill)
+        public SkillLevelViewModel(SkillTypes skill)
         {
             Skill = skill.ToString();
         }

@@ -2,7 +2,6 @@
 using RyaScape.Models;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Windows;
 
 namespace RyaScape.ViewModels
 {
@@ -11,7 +10,7 @@ namespace RyaScape.ViewModels
         private string _name;
         private bool _completed;
         private List<Quest> _prerequisteQuests;
-        private Dictionary<SkillType, int> _prerequisteSkills;
+        private Dictionary<SkillTypes, int> _prerequisteSkills;
         private ObservableCollection<Requirements> _requirements;
 
         public string Name
@@ -32,7 +31,7 @@ namespace RyaScape.ViewModels
             set => SetAndNotify(ref _prerequisteQuests, value);
         }
 
-        public Dictionary<SkillType, int> PrerequisteSkills
+        public Dictionary<SkillTypes, int> PrerequisteSkills
         {
             get => _prerequisteSkills;
             set => SetAndNotify(ref _prerequisteSkills, value);

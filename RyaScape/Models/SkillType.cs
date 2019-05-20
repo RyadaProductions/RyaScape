@@ -1,6 +1,6 @@
 namespace RyaScape.Models
 {
-    public enum SkillType
+    public enum SkillTypes
     {
         Total,
         Attack,

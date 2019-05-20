@@ -1,10 +1,7 @@
-﻿using System.Collections.ObjectModel;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using System.Windows.Input;
 using RyaScape.Mvvm;
 using RyaScape.Models;
-using System.Linq;
-using System.Collections.Generic;
 
 namespace RyaScape.ViewModels
 {

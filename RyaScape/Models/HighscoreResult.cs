@@ -19,36 +19,36 @@ namespace RyaScape.Models
             set => SetAndNotify(ref _error, value);
         }
 
-        public Dictionary<SkillType, SkillLevelViewModel> Skills { get; }
+        public Dictionary<SkillTypes, SkillLevelViewModel> Skills { get; }
 
         public HighscoreResult()
         {
-            Skills = new Dictionary<SkillType, SkillLevelViewModel>()
+            Skills = new Dictionary<SkillTypes, SkillLevelViewModel>()
             {
-                [SkillType.Total] = new SkillLevelViewModel(SkillType.Total),
-                [SkillType.Attack] = new SkillLevelViewModel(SkillType.Attack),
-                [SkillType.Defence] = new SkillLevelViewModel(SkillType.Defence),
-                [SkillType.Strength] = new SkillLevelViewModel(SkillType.Strength),
-                [SkillType.Hitpoints] = new SkillLevelViewModel(SkillType.Hitpoints),
-                [SkillType.Ranged] = new SkillLevelViewModel(SkillType.Ranged),
-                [SkillType.Prayer] = new SkillLevelViewModel(SkillType.Prayer),
-                [SkillType.Magic] = new SkillLevelViewModel(SkillType.Magic),
-                [SkillType.Cooking] = new SkillLevelViewModel(SkillType.Cooking),
-                [SkillType.Woodcutting] = new SkillLevelViewModel(SkillType.Woodcutting),
-                [SkillType.Fletching] = new SkillLevelViewModel(SkillType.Fletching),
-                [SkillType.Fishing] = new SkillLevelViewModel(SkillType.Fishing),
-                [SkillType.Firemaking] = new SkillLevelViewModel(SkillType.Firemaking),
-                [SkillType.Crafting] = new SkillLevelViewModel(SkillType.Crafting),
-                [SkillType.Smithing] = new SkillLevelViewModel(SkillType.Smithing),
-                [SkillType.Mining] = new SkillLevelViewModel(SkillType.Mining),
-                [SkillType.Herblore] = new SkillLevelViewModel(SkillType.Herblore),
-                [SkillType.Agility] = new SkillLevelViewModel(SkillType.Agility),
-                [SkillType.Thieving] = new SkillLevelViewModel(SkillType.Thieving),
-                [SkillType.Slayer] = new SkillLevelViewModel(SkillType.Slayer),
-                [SkillType.Farming] = new SkillLevelViewModel(SkillType.Farming),
-                [SkillType.Runecraft] = new SkillLevelViewModel(SkillType.Runecraft),
-                [SkillType.Hunter] = new SkillLevelViewModel(SkillType.Hunter),
-                [SkillType.Construction] = new SkillLevelViewModel(SkillType.Construction)
+                [SkillTypes.Total] = new SkillLevelViewModel(SkillTypes.Total),
+                [SkillTypes.Attack] = new SkillLevelViewModel(SkillTypes.Attack),
+                [SkillTypes.Defence] = new SkillLevelViewModel(SkillTypes.Defence),
+                [SkillTypes.Strength] = new SkillLevelViewModel(SkillTypes.Strength),
+                [SkillTypes.Hitpoints] = new SkillLevelViewModel(SkillTypes.Hitpoints),
+                [SkillTypes.Ranged] = new SkillLevelViewModel(SkillTypes.Ranged),
+                [SkillTypes.Prayer] = new SkillLevelViewModel(SkillTypes.Prayer),
+                [SkillTypes.Magic] = new SkillLevelViewModel(SkillTypes.Magic),
+                [SkillTypes.Cooking] = new SkillLevelViewModel(SkillTypes.Cooking),
+                [SkillTypes.Woodcutting] = new SkillLevelViewModel(SkillTypes.Woodcutting),
+                [SkillTypes.Fletching] = new SkillLevelViewModel(SkillTypes.Fletching),
+                [SkillTypes.Fishing] = new SkillLevelViewModel(SkillTypes.Fishing),
+                [SkillTypes.Firemaking] = new SkillLevelViewModel(SkillTypes.Firemaking),
+                [SkillTypes.Crafting] = new SkillLevelViewModel(SkillTypes.Crafting),
+                [SkillTypes.Smithing] = new SkillLevelViewModel(SkillTypes.Smithing),
+                [SkillTypes.Mining] = new SkillLevelViewModel(SkillTypes.Mining),
+                [SkillTypes.Herblore] = new SkillLevelViewModel(SkillTypes.Herblore),
+                [SkillTypes.Agility] = new SkillLevelViewModel(SkillTypes.Agility),
+                [SkillTypes.Thieving] = new SkillLevelViewModel(SkillTypes.Thieving),
+                [SkillTypes.Slayer] = new SkillLevelViewModel(SkillTypes.Slayer),
+                [SkillTypes.Farming] = new SkillLevelViewModel(SkillTypes.Farming),
+                [SkillTypes.Runecraft] = new SkillLevelViewModel(SkillTypes.Runecraft),
+                [SkillTypes.Hunter] = new SkillLevelViewModel(SkillTypes.Hunter),
+                [SkillTypes.Construction] = new SkillLevelViewModel(SkillTypes.Construction)
             };
         }
     }

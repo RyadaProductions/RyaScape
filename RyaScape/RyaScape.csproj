@@ -76,7 +76,7 @@
     </ApplicationDefinition>
     <Compile Include="Models\HighscoreResult.cs" />
     <Compile Include="Models\Quest.cs" />
-    <Compile Include="Models\Quests.cs" />
+    <Compile Include="Models\QuestLoader.cs" />
     <Compile Include="Models\HighscoreLoader.cs" />
     <Compile Include="Models\SkillType.cs" />
     <Compile Include="Mvvm\AwaitableDelegateCommand.cs" />

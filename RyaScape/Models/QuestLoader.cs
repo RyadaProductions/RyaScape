@@ -5,7 +5,7 @@ using System.IO;
 
 namespace RyaScape.Models
 {
-    internal class Quests
+    internal class QuestLoader
     {
         public Dictionary<string, Quest> LoadQuests()
         {

@@ -11,7 +11,7 @@ namespace RyaScape.Converters
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             if (value == null) return string.Empty;
-            if (!Enum.TryParse<SkillType>(value.ToString(), out var attachmentType)) return string.Empty;
+            if (!Enum.TryParse<SkillTypes>(value.ToString(), out var attachmentType)) return string.Empty;
 
             return $"/RyaScape;component/Resources/07skill-icons/{attachmentType}-icon.png";
         }
