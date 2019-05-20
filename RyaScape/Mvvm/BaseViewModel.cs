@@ -30,7 +30,8 @@ namespace RyaScape.Mvvm
 
         private void OnPropertyChanged(string propertyName)
         {
-            PropertyChanged?.BeginInvoke(string.Empty, new PropertyChangedEventArgs(propertyName), null, null);
+            if (PropertyChanged is null) return;
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }

@@ -1,7 +1,6 @@
 ﻿using RyaScape.Mvvm;
 using RyaScape.ViewModels;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 
 namespace RyaScape.Models
 {
