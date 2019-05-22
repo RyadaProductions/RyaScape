@@ -7,6 +7,7 @@ namespace RyaScape.ViewModels
 {
     public class HighscoreViewModel : BaseViewModel
     {
+        private readonly HighscoreLoader _highscoreLoader;
         private readonly MainViewModel _mainModel;
         private HighscoreResult _highscore;
 
@@ -18,15 +19,16 @@ namespace RyaScape.ViewModels
 
         public ICommand LoadCommand => new AwaitableDelegateCommand(Load);
 
-        public HighscoreViewModel(MainViewModel mainModel)
+        public HighscoreViewModel(MainViewModel mainModel, HighscoreResult highscore, HighscoreLoader highscoreLoader)
         {
             _mainModel = mainModel;
-            Highscore = new HighscoreResult();
+            _highscoreLoader = highscoreLoader;
+            Highscore = highscore;
         }
 
         public async Task Load()
         {
-            await new HighscoreLoader().ReadHighscore(Highscore);
+            await _highscoreLoader.ReadHighscore(Highscore);
 
             _mainModel.QuestingModel.Update(string.Empty, new System.ComponentModel.PropertyChangedEventArgs(string.Empty));
         }

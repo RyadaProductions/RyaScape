@@ -6,8 +6,20 @@ using System.Windows;
 
 namespace RyaScape.Models
 {
-    public class HighscoreLoader
+    public class HighscoreLoader : IDisposable
     {
+        private readonly HttpClient _httpClient;
+
+        public HighscoreLoader(HttpClient httpClient)
+        {
+            _httpClient = httpClient;
+        }
+
+        public void Dispose()
+        {
+            _httpClient.Dispose();
+        }
+
         public async Task<HighscoreResult> ReadHighscore(HighscoreResult highscore)
         {
             if (string.IsNullOrWhiteSpace(highscore.Username))
@@ -18,27 +30,24 @@ namespace RyaScape.Models
 
             try
             {
-                using (var client = new HttpClient())
+                var data = await _httpClient.GetStringAsync($"http://services.runescape.com/m=hiscore_oldschool/index_lite.ws?player={highscore.Username}");
+
+                var lines = data.Split('\n');
+
+                for (var i = 0; i < 24; i++)
                 {
-                    var data = await client.GetStringAsync($"http://services.runescape.com/m=hiscore_oldschool/index_lite.ws?player={highscore.Username}");
+                    var skill = (SkillTypes)i;
+                    var values = lines[i].Split(',');
 
-                    var lines = data.Split('\n');
-
-                    for (var i = 0; i < 24; i++)
+                    try
                     {
-                        var skill = (SkillTypes)i;
-                        var values = lines[i].Split(',');
-
-                        try
-                        {
-                            highscore.Skills[skill].Rank = long.Parse(values[0]);
-                            highscore.Skills[skill].Level = long.Parse(values[1]);
-                            highscore.Skills[skill].Xp = long.Parse(values[2]);
-                        }
-                        catch (Exception ex)
-                        {
-                            MessageBox.Show(ex.Message);
-                        }
+                        highscore.Skills[skill].Rank = long.Parse(values[0]);
+                        highscore.Skills[skill].Level = long.Parse(values[1]);
+                        highscore.Skills[skill].Xp = long.Parse(values[2]);
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.Message);
                     }
                 }
                 highscore.Error = $"{highscore.Username} loaded successfully.";

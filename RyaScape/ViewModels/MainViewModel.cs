@@ -1,4 +1,6 @@
+using RyaScape.Models;
 using RyaScape.Mvvm;
+using System.Net.Http;
 
 namespace RyaScape.ViewModels
 {
@@ -7,10 +9,15 @@ namespace RyaScape.ViewModels
         public HighscoreViewModel HighscoreModel { get; }
         public QuestingViewModel QuestingModel { get; }
 
+        private static readonly HttpClient _httpClient = new HttpClient();
+
         public MainViewModel()
         {
-            HighscoreModel = new HighscoreViewModel(this);
-            QuestingModel = new QuestingViewModel(HighscoreModel.Highscore.Skills);
+            var highscore = new HighscoreResult();
+            var highscoreLoader = new HighscoreLoader(_httpClient);
+
+            HighscoreModel = new HighscoreViewModel(this, highscore, highscoreLoader);
+            QuestingModel = new QuestingViewModel(highscore.Skills);
         }
     }
 }
