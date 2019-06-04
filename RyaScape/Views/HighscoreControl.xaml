@@ -12,8 +12,14 @@
     <materialDesign:ColorZone Mode="Dark">
         <materialDesign:DialogHost IsOpen="{Binding IsBusy}">
             <materialDesign:DialogHost.DialogContent>
-                <ProgressBar Style="{DynamicResource MaterialDesignCircularProgressBar}" HorizontalAlignment="Center" Margin="16" IsIndeterminate="True" Value="0"/>
+                <materialDesign:ColorZone Mode="Dark">
+                    <StackPanel Margin="12">
+                        <ProgressBar Style="{DynamicResource MaterialDesignCircularProgressBar}" HorizontalAlignment="Center" Margin="16" IsIndeterminate="True" Value="0"/>
+                        <TextBlock Text="Loading" />
+                    </StackPanel>
+                </materialDesign:ColorZone>
             </materialDesign:DialogHost.DialogContent>
+
             <Grid Margin="0,10,0,0">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="193*" />
