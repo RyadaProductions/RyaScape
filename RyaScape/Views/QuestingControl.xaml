@@ -7,54 +7,59 @@
              xmlns:viewModel="clr-namespace:RyaScape.ViewModels"
              xmlns:converters="clr-namespace:RyaScape.Converters"
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300" d:DataContext="{d:DesignInstance viewModel:QuestingViewModel}">
+             d:DesignHeight="300" d:DesignWidth="300" d:DataContext="{d:DesignInstance viewModel:QuestingViewModel, IsDesignTimeCreatable=False}">
 
     <materialDesign:ColorZone Mode="Dark">
-        <Grid>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="193*" />
-                <ColumnDefinition Width="143*"/>
-                <ColumnDefinition Width="100" />
-                <ColumnDefinition Width="100"/>
-            </Grid.ColumnDefinitions>
+        <materialDesign:DialogHost IsOpen="{Binding IsBusy}">
+            <materialDesign:DialogHost.DialogContent>
+                <ProgressBar Style="{DynamicResource MaterialDesignCircularProgressBar}" HorizontalAlignment="Center" Margin="16" IsIndeterminate="True" Value="0"/>
+            </materialDesign:DialogHost.DialogContent>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="193*" />
+                    <ColumnDefinition Width="143*"/>
+                    <ColumnDefinition Width="100" />
+                    <ColumnDefinition Width="100"/>
+                </Grid.ColumnDefinitions>
 
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="*" />
-            </Grid.RowDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
 
-            <!--<TextBlock Grid.Row="0" Text="{Binding Error}" Grid.ColumnSpan="2" Margin="5,0,0,0" VerticalAlignment="Center"/>-->
-            <TextBlock Grid.Row="0" TextAlignment="Right" Grid.ColumnSpan="2" VerticalAlignment="Center">
+                <!--<TextBlock Grid.Row="0" Text="{Binding Error}" Grid.ColumnSpan="2" Margin="5,0,0,0" VerticalAlignment="Center"/>-->
+                <TextBlock Grid.Row="0" TextAlignment="Right" Grid.ColumnSpan="2" VerticalAlignment="Center">
                         <Run Text="Profile: " />
-            </TextBlock>
+                </TextBlock>
 
-            <ComboBox Grid.Row="0" Grid.Column="2" HorizontalAlignment="Left" VerticalAlignment="Top" Width="100" IsEditable="True" SelectedItem="{Binding CurrentProfile, UpdateSourceTrigger=PropertyChanged}" ItemsSource="{Binding Profiles}"/>
+                <ComboBox Grid.Row="0" Grid.Column="2" HorizontalAlignment="Left" VerticalAlignment="Top" Width="100" IsEditable="True" SelectedItem="{Binding CurrentProfile, UpdateSourceTrigger=PropertyChanged}" ItemsSource="{Binding Profiles}"/>
 
-            <Button Grid.Row="0" Grid.Column="3" Content="Load" Margin="0,0,5,0" Height="24" IsDefault="True" />
+                <Button Grid.Row="0" Grid.Column="3" Content="Load" Margin="0,0,5,0" Height="24" IsDefault="True" />
 
-            <DataGrid Grid.Row="1" Grid.ColumnSpan="4" Grid.Column="0" ItemsSource="{Binding QuestList}" MouseDown="DataGrid_MouseDown" AutoGenerateColumns="False" CanUserAddRows="False" CanUserDeleteRows="False" CanUserResizeRows="False" IsReadOnly="True" SelectionMode="Single">
-                <DataGrid.Columns>
-                    <DataGridTemplateColumn Header="Completed">
-                        <DataGridTemplateColumn.CellTemplate>
-                            <DataTemplate>
-                                <CheckBox IsChecked="{Binding Completed, UpdateSourceTrigger=PropertyChanged}"/>
-                            </DataTemplate>
-                        </DataGridTemplateColumn.CellTemplate>
-                    </DataGridTemplateColumn>
-                    <DataGridTextColumn Binding="{Binding Name}" Header="Quest" Width="4*" />
-                </DataGrid.Columns>
-                <DataGrid.RowDetailsTemplate>
-                    <DataTemplate>
-                        <ItemsControl ItemsSource="{Binding Requirements}" Margin="10,10,0,10" Visibility="{Binding Requirements, Converter={converters:QuestReqToVisibilityConverter}}">
-                            <ItemsControl.ItemTemplate>
+                <DataGrid Grid.Row="1" Grid.ColumnSpan="4" Grid.Column="0" ItemsSource="{Binding QuestList}" MouseDown="DataGrid_MouseDown" AutoGenerateColumns="False" CanUserAddRows="False" CanUserDeleteRows="False" CanUserResizeRows="False" IsReadOnly="True" SelectionMode="Single">
+                    <DataGrid.Columns>
+                        <DataGridTemplateColumn Header="Completed">
+                            <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
-                                    <TextBlock Text="{Binding RequirementName}" TextDecorations="{Binding RequirementStatus}"/>
+                                    <CheckBox IsChecked="{Binding Completed, UpdateSourceTrigger=PropertyChanged}"/>
                                 </DataTemplate>
-                            </ItemsControl.ItemTemplate>
-                        </ItemsControl>
-                    </DataTemplate>
-                </DataGrid.RowDetailsTemplate>
-            </DataGrid>
-        </Grid>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <DataGridTextColumn Binding="{Binding Name}" Header="Quest" Width="4*" />
+                    </DataGrid.Columns>
+                    <DataGrid.RowDetailsTemplate>
+                        <DataTemplate>
+                            <ItemsControl ItemsSource="{Binding Requirements}" Margin="10,10,0,10" Visibility="{Binding Requirements, Converter={converters:QuestReqToVisibilityConverter}}">
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding RequirementName}" TextDecorations="{Binding RequirementStatus}"/>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
+                        </DataTemplate>
+                    </DataGrid.RowDetailsTemplate>
+                </DataGrid>
+            </Grid>
+        </materialDesign:DialogHost>
     </materialDesign:ColorZone>
 </UserControl>

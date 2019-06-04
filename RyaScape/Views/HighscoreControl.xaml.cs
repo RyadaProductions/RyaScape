@@ -1,11 +1,11 @@
 ﻿namespace RyaScape.Views
 {
     /// <summary>
-    /// Interaction logic for HighscoreControl.xaml
+    /// Interaction logic for HighScoreControl.xaml
     /// </summary>
-    public partial class HighscoreControl
+    public partial class HighScoreControl
     {
-        public HighscoreControl()
+        public HighScoreControl()
         {
             InitializeComponent();
         }

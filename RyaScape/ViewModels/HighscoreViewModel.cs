@@ -3,44 +3,45 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using RyaScape.Mvvm;
 using RyaScape.Models;
+using RyaScape.Services;
 
 namespace RyaScape.ViewModels
 {
-    public class HighscoreViewModel : BaseViewModel
+    public class HighScoreViewModel : BaseViewModel
     {
-        private readonly HighscoreLoader _highscoreLoader;
-        private readonly MainViewModel _mainModel;
-        private HighscoreResult _highscore;
-
+        private readonly HighScoreLoader _highScoreLoader;
+        private readonly QuestingViewModel _questingViewModel;
+        private HighScoreResultViewModel _highScore;
         private bool _isBusy;
+
         public bool IsBusy
         {
             get => _isBusy;
             set => SetAndNotify(ref _isBusy, value);
         }
 
-        public HighscoreResult Highscore
+        public HighScoreResultViewModel HighScore
         {
-            get => _highscore;
-            set => SetAndNotify(ref _highscore, value);
+            get => _highScore;
+            set => SetAndNotify(ref _highScore, value);
         }
 
         public ICommand LoadCommand => new AwaitableDelegateCommand(Load);
 
-        public HighscoreViewModel(MainViewModel mainModel, HighscoreResult highscore, HighscoreLoader highscoreLoader)
+        public HighScoreViewModel(QuestingViewModel questingViewModel, HighScoreResultViewModel highScore, HighScoreLoader highScoreLoader)
         {
-            _mainModel = mainModel;
-            _highscoreLoader = highscoreLoader;
-            Highscore = highscore;
+            _questingViewModel = questingViewModel;
+            _highScoreLoader = highScoreLoader;
+            HighScore = highScore;
         }
 
         public async Task Load()
         {
             IsBusy = true;
 
-            await _highscoreLoader.ReadHighscore(Highscore);
+            await _highScoreLoader.ReadHighScore(HighScore);
 
-            _mainModel.QuestingModel.Update(this, new PropertyChangedEventArgs(string.Empty));
+            _questingViewModel.Update(this, new PropertyChangedEventArgs(string.Empty));
 
             IsBusy = false;
         }

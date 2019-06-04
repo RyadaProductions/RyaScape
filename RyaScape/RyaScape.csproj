@@ -74,10 +74,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Models\HighscoreResult.cs" />
+    <Compile Include="ViewModels\HighScoreResultViewModel.cs" />
     <Compile Include="Models\Quest.cs" />
-    <Compile Include="Models\QuestLoader.cs" />
-    <Compile Include="Models\HighscoreLoader.cs" />
+    <Compile Include="Services\QuestLoader.cs" />
+    <Compile Include="Services\HighScoreLoader.cs" />
     <Compile Include="Models\SkillType.cs" />
     <Compile Include="Mvvm\AwaitableDelegateCommand.cs" />
     <Compile Include="Mvvm\BaseViewModel.cs" />
@@ -86,13 +86,13 @@
     <Compile Include="Views\AboutControl.xaml.cs">
       <DependentUpon>AboutControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\HighscoreControl.xaml.cs">
-      <DependentUpon>HighscoreControl.xaml</DependentUpon>
+    <Compile Include="Views\HighScoreControl.xaml.cs">
+      <DependentUpon>HighScoreControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\QuestingControl.xaml.cs">
       <DependentUpon>QuestingControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ViewModels\HighscoreViewModel.cs" />
+    <Compile Include="ViewModels\HighScoreViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="ViewModels\QuestingViewModel.cs" />
     <Compile Include="Converters\QuestReqToVisibilityConverter.cs" />
@@ -115,7 +115,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\HighscoreControl.xaml">
+    <Page Include="Views\HighScoreControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

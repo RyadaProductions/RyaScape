@@ -11,18 +11,19 @@
         Background="{DynamicResource MaterialDesignPaper}"
         FontFamily="{DynamicResource MaterialDesignFont}"
         mc:Ignorable="d"
-        Title="RyaScape" Height="500" Width="550" MaxWidth="550" Icon="Resources/RyaScape.ico">
+        Title="RyaScape" Height="500" Width="550" MaxWidth="550" Icon="Resources/RyaScape.ico"
+        d:DataContext="{d:DesignInstance viewModel:MainViewModel, IsDesignTimeCreatable=False}" >
     <Grid>
         <DockPanel>
             <dragablz:TabablzControl>
                 <dragablz:TabablzControl.InterTabController>
                     <dragablz:InterTabController />
                 </dragablz:TabablzControl.InterTabController>
-                <TabItem Header="Highscore">
-                    <views:HighscoreControl DataContext="{Binding HighscoreModel}"/>
+                <TabItem Header="HighScore">
+                    <views:HighScoreControl DataContext="{Binding HighScoreModel}"/>
                 </TabItem>
                 <TabItem Header="Quests">
-                    <views:QuestingControl DataContext="{Binding QuestingModel}"/>
+                    <views:QuestingControl DataContext="{Binding QuestingViewModel}"/>
                 </TabItem>
                 <TabItem Header="About">
                     <views:AboutControl/>

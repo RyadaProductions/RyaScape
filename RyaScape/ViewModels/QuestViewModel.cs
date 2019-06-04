@@ -9,8 +9,8 @@ namespace RyaScape.ViewModels
     {
         private string _name;
         private bool _completed;
-        private List<Quest> _prerequisteQuests;
-        private Dictionary<SkillTypes, int> _prerequisteSkills;
+        private List<Quest> _prerequisiteQuests;
+        private Dictionary<SkillTypes, int> _prerequisiteSkills;
         private ObservableCollection<Requirements> _requirements;
 
         public string Name
@@ -25,16 +25,16 @@ namespace RyaScape.ViewModels
             set => SetAndNotify(ref _completed, value);
         }
 
-        public List<Quest> PrerequisteQuests
+        public List<Quest> PrerequisiteQuests
         {
-            get => _prerequisteQuests;
-            set => SetAndNotify(ref _prerequisteQuests, value);
+            get => _prerequisiteQuests;
+            set => SetAndNotify(ref _prerequisiteQuests, value);
         }
 
-        public Dictionary<SkillTypes, int> PrerequisteSkills
+        public Dictionary<SkillTypes, int> PrerequisiteSkills
         {
-            get => _prerequisteSkills;
-            set => SetAndNotify(ref _prerequisteSkills, value);
+            get => _prerequisiteSkills;
+            set => SetAndNotify(ref _prerequisiteSkills, value);
         }
 
         public ObservableCollection<Requirements> Requirements

@@ -3,14 +3,16 @@ using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Windows;
+using RyaScape.Models;
+using RyaScape.ViewModels;
 
-namespace RyaScape.Models
+namespace RyaScape.Services
 {
-    public class HighscoreLoader : IDisposable
+    public class HighScoreLoader : IDisposable
     {
         private readonly HttpClient _httpClient;
 
-        public HighscoreLoader(HttpClient httpClient)
+        public HighScoreLoader(HttpClient httpClient)
         {
             _httpClient = httpClient;
         }
@@ -20,17 +22,17 @@ namespace RyaScape.Models
             _httpClient.Dispose();
         }
 
-        public async Task<HighscoreResult> ReadHighscore(HighscoreResult highscore)
+        public async Task<HighScoreResultViewModel> ReadHighScore(HighScoreResultViewModel highScore)
         {
-            if (string.IsNullOrWhiteSpace(highscore.Username))
+            if (string.IsNullOrWhiteSpace(highScore.Username))
             {
-                highscore.Error = "Please enter a valid username.";
-                return highscore;
+                highScore.Error = "Please enter a valid username.";
+                return highScore;
             }
 
             try
             {
-                var data = await _httpClient.GetStringAsync($"http://services.runescape.com/m=hiscore_oldschool/index_lite.ws?player={highscore.Username}");
+                var data = await _httpClient.GetStringAsync($"http://services.runescape.com/m=hiscore_oldschool/index_lite.ws?player={highScore.Username}");
 
                 var lines = data.Split('\n');
 
@@ -41,31 +43,31 @@ namespace RyaScape.Models
 
                     try
                     {
-                        highscore.Skills[skill].Rank = long.Parse(values[0]);
-                        highscore.Skills[skill].Level = long.Parse(values[1]);
-                        highscore.Skills[skill].Xp = long.Parse(values[2]);
+                        highScore.Skills[skill].Rank = long.Parse(values[0]);
+                        highScore.Skills[skill].Level = long.Parse(values[1]);
+                        highScore.Skills[skill].Xp = long.Parse(values[2]);
                     }
                     catch (Exception ex)
                     {
                         MessageBox.Show(ex.Message);
                     }
                 }
-                highscore.Error = $"{highscore.Username} loaded successfully.";
+                highScore.Error = $"{highScore.Username} loaded successfully.";
             }
             catch (WebException wex)
             {
 
                 if (wex.Response is HttpWebResponse errorResponse && errorResponse.StatusCode == HttpStatusCode.NotFound)
                 {
-                    highscore.Error = $"404: {highscore.Username} not found.";
+                    highScore.Error = $"404: {highScore.Username} not found.";
                 }
                 else
                 {
-                    highscore.Error = "Error: Something went terribly wrong.";
+                    highScore.Error = "Error: Something went terribly wrong.";
                 }
             }
 
-            return highscore;
+            return highScore;
         }
     }
 }

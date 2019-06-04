@@ -5,48 +5,48 @@ namespace RyaScape.Mvvm
 {
     public class DelegateCommand : DelegateCommand<object>
     {
-        public DelegateCommand(Action pExecute) : base(vCommand => pExecute()) { }
+        public DelegateCommand(Action execute) : base(command => execute()) { }
 
-        public DelegateCommand(Action pExecute, Func<bool> pCanExecute) : base(vCommand => pExecute(), vCommand => pCanExecute()) { }
+        public DelegateCommand(Action execute, Func<bool> canExecute) : base(command => execute(), command => canExecute()) { }
     }
 
     public class DelegateCommand<T> : ICommand
     {
-        private readonly Func<T, bool> fCanExecute;
-        private readonly Action<T> fExecute;
-        private bool fIsExecuting;
+        private readonly Func<T, bool> _canExecute;
+        private readonly Action<T> _execute;
+        private bool _isExecuting;
 
         public event EventHandler CanExecuteChanged
         {
-            add { CommandManager.RequerySuggested += value; }
-            remove { CommandManager.RequerySuggested -= value; }
+            add => CommandManager.RequerySuggested += value;
+            remove => CommandManager.RequerySuggested -= value;
         }
 
-        public DelegateCommand(Action<T> pExecute) : this(pExecute, null) { }
+        public DelegateCommand(Action<T> execute) : this(execute, null) { }
 
-        public DelegateCommand(Action<T> pExecute, Func<T, bool> pCanExecute)
+        public DelegateCommand(Action<T> execute, Func<T, bool> canExecute)
         {
-            fExecute = pExecute ?? throw new ArgumentException("pExecute", "Method to execute cannot be null");
-            fCanExecute = pCanExecute;
+            _execute = execute ?? throw new ArgumentException("execute", "Method to execute cannot be null");
+            _canExecute = canExecute;
         }
 
-        bool ICommand.CanExecute(object pParameter)
+        bool ICommand.CanExecute(object parameter)
         {
-            return !fIsExecuting && CanExecute((T)pParameter);
+            return !_isExecuting && CanExecute((T)parameter);
         }
 
-        void ICommand.Execute(object pParameter)
+        void ICommand.Execute(object parameter)
         {
-            fIsExecuting = true;
+            _isExecuting = true;
 
             try
             {
                 RaiseCanExecuteChanged();
-                Execute((T)pParameter);
+                Execute((T)parameter);
             }
             finally
             {
-                fIsExecuting = false;
+                _isExecuting = false;
                 RaiseCanExecuteChanged();
             }
         }
@@ -56,14 +56,14 @@ namespace RyaScape.Mvvm
             CommandManager.InvalidateRequerySuggested();
         }
 
-        public bool CanExecute(T pParameter)
+        public bool CanExecute(T parameter)
         {
-            return (fCanExecute == null) ? true : fCanExecute(pParameter);
+            return _canExecute?.Invoke(parameter) ?? true;
         }
 
-        public void Execute(T pParameter)
+        public void Execute(T parameter)
         {
-            fExecute(pParameter);
+            _execute(parameter);
         }
     }
 }

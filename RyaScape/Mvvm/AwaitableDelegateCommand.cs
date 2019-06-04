@@ -6,59 +6,59 @@ namespace RyaScape.Mvvm
 {
     public class AwaitableDelegateCommand : AwaitableDelegateCommand<object>
     {
-        public AwaitableDelegateCommand(Func<Task> pExecute) : base(vCommand => pExecute()) { }
+        public AwaitableDelegateCommand(Func<Task> execute) : base(command => execute()) { }
 
-        public AwaitableDelegateCommand(Func<Task> pExecute, Func<bool> pCanExecute) : base(vCommand => pExecute(), vCommand => pCanExecute()) { }
+        public AwaitableDelegateCommand(Func<Task> execute, Func<bool> canExecute) : base(command => execute(), vCommand => canExecute()) { }
     }
 
     public class AwaitableDelegateCommand<T> : ICommand
     {
-        private readonly Func<T, Task> fExecute;
-        private readonly DelegateCommand<T> fDelegateCommand;
-        private bool fIsExecuting;
+        private readonly Func<T, Task> _execute;
+        private readonly DelegateCommand<T> _delegateCommand;
+        private bool _isExecuting;
 
-        public ICommand Command { get { return this; } }
+        public ICommand Command => this;
 
         public event EventHandler CanExecuteChanged
         {
-            add { fDelegateCommand.CanExecuteChanged += value; }
-            remove { fDelegateCommand.CanExecuteChanged -= value; }
+            add => _delegateCommand.CanExecuteChanged += value;
+            remove => _delegateCommand.CanExecuteChanged -= value;
         }
 
-        public AwaitableDelegateCommand(Func<T, Task> pExecute) : this(pExecute, pCanExecute => true) { }
+        public AwaitableDelegateCommand(Func<T, Task> execute) : this(execute, canExecute => true) { }
 
-        public AwaitableDelegateCommand(Func<T, Task> pExecute, Func<T, bool> pCanExecute)
+        public AwaitableDelegateCommand(Func<T, Task> execute, Func<T, bool> canExecute)
         {
-            fExecute = pExecute;
-            fDelegateCommand = new DelegateCommand<T>(vExecuteDummy => { }, pCanExecute);
+            _execute = execute;
+            _delegateCommand = new DelegateCommand<T>(executeDummy => { }, canExecute);
         }
 
         public void RaiseCanExecuteChanged()
         {
-            fDelegateCommand.RaiseCanExecuteChanged();
+            _delegateCommand.RaiseCanExecuteChanged();
         }
 
-        public bool CanExecute(object pParameter)
+        public bool CanExecute(object parameter)
         {
-            return !fIsExecuting && fDelegateCommand.CanExecute((T)pParameter);
+            return !_isExecuting && _delegateCommand.CanExecute((T)parameter);
         }
 
-        public async void Execute(object pParameter)
+        public async void Execute(object parameter)
         {
-            await ExecuteAsync((T)pParameter);
+            await ExecuteAsync((T)parameter);
         }
 
-        public async Task ExecuteAsync(T pObject)
+        public async Task ExecuteAsync(T @object)
         {
             try
             {
-                fIsExecuting = true;
+                _isExecuting = true;
                 RaiseCanExecuteChanged();
-                await fExecute(pObject);
+                await _execute(@object);
             }
             finally
             {
-                fIsExecuting = false;
+                _isExecuting = false;
                 RaiseCanExecuteChanged();
             }
         }

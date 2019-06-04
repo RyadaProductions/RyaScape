@@ -1,9 +1,10 @@
-﻿using Newtonsoft.Json;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using Newtonsoft.Json;
+using RyaScape.Models;
 
-namespace RyaScape.Models
+namespace RyaScape.Services
 {
     internal class QuestLoader
     {

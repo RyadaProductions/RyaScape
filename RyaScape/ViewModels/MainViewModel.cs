@@ -1,23 +1,24 @@
 using RyaScape.Models;
 using RyaScape.Mvvm;
 using System.Net.Http;
+using RyaScape.Services;
 
 namespace RyaScape.ViewModels
 {
     public class MainViewModel : BaseViewModel
-    {
-        public HighscoreViewModel HighscoreModel { get; }
-        public QuestingViewModel QuestingModel { get; }
-
+    { 
         private static readonly HttpClient _httpClient = new HttpClient();
+
+        public HighScoreViewModel HighScoreModel { get; }
+        public QuestingViewModel QuestingViewModel { get; }
 
         public MainViewModel()
         {
-            var highscore = new HighscoreResult();
-            var highscoreLoader = new HighscoreLoader(_httpClient);
+            var highScore = new HighScoreResultViewModel();
+            var highScoreLoader = new HighScoreLoader(_httpClient);
 
-            HighscoreModel = new HighscoreViewModel(this, highscore, highscoreLoader);
-            QuestingModel = new QuestingViewModel(highscore.Skills);
+            QuestingViewModel = new QuestingViewModel(highScore.Skills);
+            HighScoreModel = new HighScoreViewModel(QuestingViewModel, highScore, highScoreLoader);
         }
     }
 }

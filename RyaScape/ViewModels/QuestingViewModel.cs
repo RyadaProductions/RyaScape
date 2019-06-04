@@ -8,15 +8,24 @@ using System.Linq;
 using Newtonsoft.Json;
 using System;
 using System.IO;
+using RyaScape.Services;
 
 namespace RyaScape.ViewModels
 {
     public class QuestingViewModel : BaseViewModel
     {
+        private bool _isBusy;
+        private string _currentProfile;
+
         public Dictionary<SkillTypes, SkillLevelViewModel> Skills { get; }
         public ObservableCollection<QuestViewModel> QuestList { get; } = new ObservableCollection<QuestViewModel>();
         public ObservableCollection<string> Profiles { get; } = new ObservableCollection<string>();
-        private string _currentProfile;
+
+        public bool IsBusy
+        {
+            get => _isBusy;
+            set => SetAndNotify(ref _isBusy, value);
+        }
 
         public string CurrentProfile
         {
@@ -32,11 +41,12 @@ namespace RyaScape.ViewModels
 
         public void Update(object sender, PropertyChangedEventArgs e)
         {
+            IsBusy = true;
             foreach (var questViewModel in QuestList)
             {
                 questViewModel.Requirements.Clear();
 
-                foreach (var skill in questViewModel.PrerequisteSkills)
+                foreach (var skill in questViewModel.PrerequisiteSkills)
                 {
                     var req = new Requirements
                     {
@@ -49,13 +59,13 @@ namespace RyaScape.ViewModels
                     questViewModel.Requirements.Add(req);
                 }
 
-                if (questViewModel.PrerequisteQuests.Count > 0)
+                if (questViewModel.PrerequisiteQuests.Count > 0)
                 {
                     var req = new Requirements();
                     questViewModel.Requirements.Add(req);
                 }
 
-                foreach (var quest in questViewModel.PrerequisteQuests)
+                foreach (var quest in questViewModel.PrerequisiteQuests)
                 {
                     var tmpQuest = QuestList.FirstOrDefault(x => x.Name == quest.Name);
 
@@ -71,10 +81,14 @@ namespace RyaScape.ViewModels
                 }
             }
             SaveCompleted();
+
+            IsBusy = false;
         }
 
         public void Load()
         {
+            IsBusy = true;
+
             var loader = new QuestLoader();
             var tempQuestList = loader.LoadQuests();
 
@@ -92,7 +106,7 @@ namespace RyaScape.ViewModels
             {
                 var questRequirements = new ObservableCollection<Requirements>();
 
-                foreach (var skill in quest.Value.PrerequisteSkills)
+                foreach (var skill in quest.Value.PrerequisiteSkills)
                 {
                     var req = new Requirements
                     {
@@ -106,13 +120,13 @@ namespace RyaScape.ViewModels
                     questRequirements.Add(req);
                 }
 
-                if (quest.Value.PrerequisteQuests.Count > 0)
+                if (quest.Value.PrerequisiteQuests.Count > 0)
                 {
                     var req = new Requirements();
                     questRequirements.Add(req);
                 }
 
-                foreach (var quests in quest.Value.PrerequisteQuests)
+                foreach (var quests in quest.Value.PrerequisiteQuests)
                 {
                     var req = new Requirements
                     {
@@ -134,14 +148,16 @@ namespace RyaScape.ViewModels
                 {
                     Name = quest.Value.Name,
                     Completed = quest.Value.Completed,
-                    PrerequisteQuests = quest.Value.PrerequisteQuests,
-                    PrerequisteSkills = quest.Value.PrerequisteSkills,
+                    PrerequisiteQuests = quest.Value.PrerequisiteQuests,
+                    PrerequisiteSkills = quest.Value.PrerequisiteSkills,
                     Requirements = questRequirements
                 };
                 newQuest.PropertyChanged += Update;
 
                 QuestList.Add(newQuest);
             }
+
+            IsBusy = false;
         }
 
         //Save the completed quest list to disk

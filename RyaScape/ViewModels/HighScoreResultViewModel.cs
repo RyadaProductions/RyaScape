@@ -1,10 +1,10 @@
-﻿using RyaScape.Mvvm;
-using RyaScape.ViewModels;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using RyaScape.Models;
+using RyaScape.Mvvm;
 
-namespace RyaScape.Models
+namespace RyaScape.ViewModels
 {
-    public class HighscoreResult : BaseViewModel
+    public class HighScoreResultViewModel : BaseViewModel
     {
         private string _username = string.Empty;
         private string _error = string.Empty;
@@ -21,9 +21,9 @@ namespace RyaScape.Models
 
         public Dictionary<SkillTypes, SkillLevelViewModel> Skills { get; }
 
-        public HighscoreResult()
+        public HighScoreResultViewModel()
         {
-            Skills = new Dictionary<SkillTypes, SkillLevelViewModel>()
+            Skills = new Dictionary<SkillTypes, SkillLevelViewModel>
             {
                 [SkillTypes.Total] = new SkillLevelViewModel(SkillTypes.Total),
                 [SkillTypes.Attack] = new SkillLevelViewModel(SkillTypes.Attack),
