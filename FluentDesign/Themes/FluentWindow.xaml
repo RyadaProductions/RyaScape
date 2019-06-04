@@ -2,43 +2,125 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:fluentControls="clr-namespace:FluentDesign.Controls">
 
-    <ControlTemplate x:Key="WindowTemplateKey" TargetType="{x:Type fluentControls:FluentWindow}">
-        <Border BorderBrush="AliceBlue" BorderThickness="5">
+    <Style TargetType="{x:Type Button}" x:Key="WindowButtonStyle">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type ButtonBase}">
+                    <Border
+                        x:Name="Chrome"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        Margin="0"
+                        Background="{TemplateBinding Background}"
+                        SnapsToDevicePixels="True">
+                        <ContentPresenter
+                            ContentTemplate="{TemplateBinding ContentTemplate}"
+                            Content="{TemplateBinding Content}"
+                            ContentStringFormat="{TemplateBinding ContentStringFormat}"
+                            HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                            Margin="{TemplateBinding Padding}"
+                            RecognizesAccessKey="True"
+                            SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
+                            VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="FontFamily" Value="Webdings"/>
+        <Setter Property="FontSize" Value="13.333" />
+        <Setter Property="Foreground" Value="AliceBlue" />
+        <Setter Property="Margin" Value="0,2,3,0"/>
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Foreground" Value="NavajoWhite" />
+            </Trigger>
+        </Style.Triggers>
+    </Style>
 
-            <Grid Background="{TemplateBinding Background}"
+    <DataTemplate x:Key="IconTemplate">
+        <Image Source="{TemplateBinding Content}" Width="23" Height="23" Margin="10 0 0 0"/>
+    </DataTemplate>
+
+    <ControlTemplate x:Key="WindowTemplateKey" TargetType="{x:Type fluentControls:FluentWindow}">
+        <Grid Background="{TemplateBinding Background}"
               LayoutTransform="{Binding LayoutTransform, RelativeSource={RelativeSource TemplatedParent}}"
               RenderTransform="{Binding RenderTransform, RelativeSource={RelativeSource TemplatedParent}}"
               SnapsToDevicePixels="True"
               UseLayoutRounding="True">
-
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition />
-                    </Grid.RowDefinitions>
+            <AdornerDecorator>
+                <Grid UseLayoutRounding="False">
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition />
+                        <ColumnDefinition Width="1"/>
                         <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="1"/>
                     </Grid.ColumnDefinitions>
-                    <Rectangle x:Name="moveRectangle" Fill="Transparent"
-                               Grid.Row="0" Grid.Column="0"/>
-                    <StackPanel Grid.Row="0" Grid.Column="1" Orientation="Horizontal">
-                        <Button x:Name="minimizeButton"
+
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="1"/>
+                        <RowDefinition Height="25"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <Rectangle x:Name="titleBackground" 
+                               Fill="#99000000" 
+                               Grid.Row="1" 
+                               Grid.Column="1" 
+                               Grid.ColumnSpan="3" 
+                               Focusable="False" 
+                               StrokeThickness="0" />
+
+                    <ContentControl x:Name="icon" 
+                                    Grid.Row="1" 
+                                    Grid.Column="1"
+                                    Height="10"
+                                    MinWidth="10"
+                                    HorizontalContentAlignment="Stretch"
+                                    VerticalContentAlignment="Stretch"
+                                    Panel.ZIndex="1"
+                                    Content="{TemplateBinding Icon}"
+                                    ContentTemplate="{StaticResource IconTemplate}"
+                                    Focusable="False" />
+
+                    <TextBlock x:Name="title"
+                               Grid.Row="1"
+                               Grid.Column="2" 
+                               FontSize="13.333"
+                               Text="{TemplateBinding Title}"
+                               VerticalAlignment="Center"
+                               Foreground="AliceBlue"/>
+
+                    <StackPanel Grid.Row="1" 
+                                Grid.Column="3" 
+                                Orientation="Horizontal">
+                        <Button x:Name="minimizeButton" 
+                                Style="{StaticResource WindowButtonStyle}"
                                 Content="0" />
-                        <Button x:Name="restoreButton"
+                        <Button x:Name="restoreButton" 
+                                Style="{StaticResource WindowButtonStyle}"
                                 Content="1" />
                         <Button x:Name="closeButton" 
+                                Style="{StaticResource WindowButtonStyle}"
                                 Content="r" />
                     </StackPanel>
+
                     <Grid Background="{TemplateBinding Background}"
-                          Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Margin="5,5,5,5">
+                          Grid.Row="2" 
+                          Grid.Column="0" 
+                          Grid.ColumnSpan="5" 
+                          Margin="5,5,5,5">
                         <AdornerDecorator>
                             <ContentPresenter/>
                         </AdornerDecorator>
                     </Grid>
                 </Grid>
-            </Grid>
-        </Border>
+            </AdornerDecorator>
+
+            <Border BorderBrush="AntiqueWhite" 
+                    BorderThickness="1" 
+                    UseLayoutRounding="True" />
+        </Grid>
     </ControlTemplate>
 
     <Style TargetType="{x:Type fluentControls:FluentWindow}">
