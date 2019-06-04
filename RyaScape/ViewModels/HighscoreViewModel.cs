@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.ComponentModel;
+using System.Threading.Tasks;
 using System.Windows.Input;
 using RyaScape.Mvvm;
 using RyaScape.Models;
@@ -10,6 +11,13 @@ namespace RyaScape.ViewModels
         private readonly HighscoreLoader _highscoreLoader;
         private readonly MainViewModel _mainModel;
         private HighscoreResult _highscore;
+
+        private bool _isBusy;
+        public bool IsBusy
+        {
+            get => _isBusy;
+            set => SetAndNotify(ref _isBusy, value);
+        }
 
         public HighscoreResult Highscore
         {
@@ -28,9 +36,13 @@ namespace RyaScape.ViewModels
 
         public async Task Load()
         {
+            IsBusy = true;
+
             await _highscoreLoader.ReadHighscore(Highscore);
 
-            _mainModel.QuestingModel.Update(string.Empty, new System.ComponentModel.PropertyChangedEventArgs(string.Empty));
+            _mainModel.QuestingModel.Update(this, new PropertyChangedEventArgs(string.Empty));
+
+            IsBusy = false;
         }
     }
 }

@@ -32,11 +32,11 @@ namespace RyaScape.ViewModels
 
         public void Update(object sender, PropertyChangedEventArgs e)
         {
-            foreach (var questvm in QuestList)
+            foreach (var questViewModel in QuestList)
             {
-                questvm.Requirements.Clear();
+                questViewModel.Requirements.Clear();
 
-                foreach (var skill in questvm.PrerequisteSkills)
+                foreach (var skill in questViewModel.PrerequisteSkills)
                 {
                     var req = new Requirements
                     {
@@ -46,16 +46,16 @@ namespace RyaScape.ViewModels
                         : null
                     };
 
-                    questvm.Requirements.Add(req);
+                    questViewModel.Requirements.Add(req);
                 }
 
-                if (questvm.PrerequisteQuests.Count > 0)
+                if (questViewModel.PrerequisteQuests.Count > 0)
                 {
                     var req = new Requirements();
-                    questvm.Requirements.Add(req);
+                    questViewModel.Requirements.Add(req);
                 }
 
-                foreach (var quest in questvm.PrerequisteQuests)
+                foreach (var quest in questViewModel.PrerequisteQuests)
                 {
                     var tmpQuest = QuestList.FirstOrDefault(x => x.Name == quest.Name);
 
@@ -67,7 +67,7 @@ namespace RyaScape.ViewModels
                         req.RequirementStatus = tmpQuest.Completed ? TextDecorations.Strikethrough : null;
                     }
 
-                    questvm.Requirements.Add(req);
+                    questViewModel.Requirements.Add(req);
                 }
             }
             SaveCompleted();
@@ -76,7 +76,7 @@ namespace RyaScape.ViewModels
         public void Load()
         {
             var loader = new QuestLoader();
-            var tempquestList = loader.LoadQuests();
+            var tempQuestList = loader.LoadQuests();
 
             LoadProfiles();
 
@@ -88,9 +88,9 @@ namespace RyaScape.ViewModels
                 completedQuests.AddRange(desList);
             }
 
-            foreach (var quest in tempquestList)
+            foreach (var quest in tempQuestList)
             {
-                var questrequirements = new ObservableCollection<Requirements>();
+                var questRequirements = new ObservableCollection<Requirements>();
 
                 foreach (var skill in quest.Value.PrerequisteSkills)
                 {
@@ -103,13 +103,13 @@ namespace RyaScape.ViewModels
                     };
 
 
-                    questrequirements.Add(req);
+                    questRequirements.Add(req);
                 }
 
                 if (quest.Value.PrerequisteQuests.Count > 0)
                 {
                     var req = new Requirements();
-                    questrequirements.Add(req);
+                    questRequirements.Add(req);
                 }
 
                 foreach (var quests in quest.Value.PrerequisteQuests)
@@ -121,7 +121,7 @@ namespace RyaScape.ViewModels
                     };
 
 
-                    questrequirements.Add(req);
+                    questRequirements.Add(req);
                 }
 
                 //Check if the quest has been saved as completed
@@ -136,7 +136,7 @@ namespace RyaScape.ViewModels
                     Completed = quest.Value.Completed,
                     PrerequisteQuests = quest.Value.PrerequisteQuests,
                     PrerequisteSkills = quest.Value.PrerequisteSkills,
-                    Requirements = questrequirements
+                    Requirements = questRequirements
                 };
                 newQuest.PropertyChanged += Update;
 
