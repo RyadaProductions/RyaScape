@@ -207,15 +207,15 @@
     <PackageReference Include="Dragablz">
       <Version>0.0.3.203</Version>
     </PackageReference>
-    <PackageReference Include="MaterialDesignColors">
-      <Version>1.1.3</Version>
-    </PackageReference>
-    <PackageReference Include="MaterialDesignThemes">
-      <Version>2.5.1</Version>
-    </PackageReference>
     <PackageReference Include="Newtonsoft.Json">
       <Version>12.0.2</Version>
     </PackageReference>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\FluentDesign\FluentDesign.csproj">
+      <Project>{b494f644-2c7c-44fd-9d8f-036b645771cf}</Project>
+      <Name>FluentDesign</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

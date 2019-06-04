@@ -1,11 +1,12 @@
-﻿using RyaScape.ViewModels;
+﻿using FluentDesign.Controls;
+using RyaScape.ViewModels;
 
 namespace RyaScape
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow
+    public partial class MainWindow : FluentWindow
     {
         public MainWindow()
         {

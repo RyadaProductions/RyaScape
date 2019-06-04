@@ -1,24 +1,20 @@
-﻿<Window x:Class="RyaScape.MainWindow"
+﻿<fluent:FluentWindow x:Class="RyaScape.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:viewModel="clr-namespace:RyaScape.ViewModels"
-        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:fluent="clr-namespace:FluentDesign.Controls;assembly=FluentDesign"
         xmlns:dragablz="clr-namespace:Dragablz;assembly=Dragablz"
         xmlns:views="clr-namespace:RyaScape.Views"
-        TextElement.Foreground="{DynamicResource MaterialDesignBody}"     
-        Background="{DynamicResource MaterialDesignPaper}"
-        FontFamily="{DynamicResource MaterialDesignFont}"
         mc:Ignorable="d"
+        fluent:FluentWindow.IsAcrylic="True"
         Title="RyaScape" Height="500" Width="550" MaxWidth="550" Icon="Resources/RyaScape.ico"
-        d:DataContext="{d:DesignInstance viewModel:MainViewModel, IsDesignTimeCreatable=False}" >
+        d:DataContext="{d:DesignInstance viewModel:MainViewModel, IsDesignTimeCreatable=False}"
+        >
     <Grid>
-        <DockPanel>
-            <dragablz:TabablzControl>
-                <dragablz:TabablzControl.InterTabController>
-                    <dragablz:InterTabController />
-                </dragablz:TabablzControl.InterTabController>
+        <DockPanel Margin="50">
+            <TabControl>
                 <TabItem Header="HighScore">
                     <views:HighScoreControl DataContext="{Binding HighScoreModel}"/>
                 </TabItem>
@@ -28,7 +24,7 @@
                 <TabItem Header="About">
                     <views:AboutControl/>
                 </TabItem>
-            </dragablz:TabablzControl>
+            </TabControl>
         </DockPanel>
     </Grid>
-</Window>
+</fluent:FluentWindow>

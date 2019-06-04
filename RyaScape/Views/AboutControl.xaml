@@ -3,21 +3,18 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d" 
              d:DesignHeight="600" d:DesignWidth="550">
-    <materialDesign:ColorZone Mode="Dark">
-        <Grid Margin="5,10,5,0">
-            <DockPanel>
-                <StackPanel>
-                    <Image HorizontalAlignment="Left" Margin="0" VerticalAlignment="Top" Source="/RyaScape;component/Resources/ryua.png"/>
-                    <TextBlock Text="By Ryada" FontSize="16"/>
-                    <TextBlock><Hyperlink NavigateUri="https://www.ryada.pro" RequestNavigate="Hyperlink_RequestNavigate" Foreground="#FF1A8DFF">www.ryada.pro</Hyperlink></TextBlock>
-                    <TextBlock Text="Version: 0.0.100" Margin="0,7,0,0" FontSize="10" />
-                    <TextBlock Text="Feedback: Github.com" Foreground="#FF1A8DFF"/>
-                    <TextBlock Text="This program uses the Runescape highScores application programming interface but is not endorsed or certified by Jagex." FontSize="9" Foreground="#FFA4A4A4"/>
-                </StackPanel>
-            </DockPanel>
-        </Grid>
-    </materialDesign:ColorZone>
+    <Grid Margin="5,10,5,0">
+        <DockPanel>
+            <StackPanel>
+                <Image HorizontalAlignment="Left" Margin="0" VerticalAlignment="Top" Source="/RyaScape;component/Resources/ryua.png"/>
+                <TextBlock Text="By Ryada" FontSize="16"/>
+                <TextBlock><Hyperlink NavigateUri="https://www.ryada.pro" RequestNavigate="Hyperlink_RequestNavigate" Foreground="#FF1A8DFF">www.ryada.pro</Hyperlink></TextBlock>
+                <TextBlock Text="Version: 0.0.100" Margin="0,7,0,0" FontSize="10" />
+                <TextBlock Text="Feedback: Github.com" Foreground="#FF1A8DFF"/>
+                <TextBlock Text="This program uses the Runescape highScores application programming interface but is not endorsed or certified by Jagex." FontSize="9" Foreground="#FFA4A4A4"/>
+            </StackPanel>
+        </DockPanel>
+    </Grid>
 </UserControl>

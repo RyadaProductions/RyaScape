@@ -3,66 +3,50 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:viewModel="clr-namespace:RyaScape.ViewModels"
-             xmlns:diag="clr-namespace:System.Diagnostics;assembly=WindowsBase"
              xmlns:converters="clr-namespace:RyaScape.Converters"
              mc:Ignorable="d" 
              d:DesignHeight="350" d:DesignWidth="550" d:DataContext="{d:DesignInstance viewModel:HighScoreViewModel, IsDesignTimeCreatable=False}">
-    <materialDesign:ColorZone Mode="Dark">
-        <materialDesign:DialogHost IsOpen="{Binding IsBusy}">
-            <materialDesign:DialogHost.DialogContent>
-                <materialDesign:ColorZone Mode="Dark">
-                    <StackPanel Margin="12">
-                        <ProgressBar Style="{DynamicResource MaterialDesignCircularProgressBar}" HorizontalAlignment="Center" Margin="16" IsIndeterminate="True" Value="0"/>
-                        <TextBlock Text="Loading" />
-                    </StackPanel>
-                </materialDesign:ColorZone>
-            </materialDesign:DialogHost.DialogContent>
+    <Grid Margin="0,10,0,0">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="193*" />
+            <ColumnDefinition Width="143*"/>
+            <ColumnDefinition Width="100" />
+            <ColumnDefinition Width="100"/>
+        </Grid.ColumnDefinitions>
 
-            <Grid Margin="0,10,0,0">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="193*" />
-                    <ColumnDefinition Width="143*"/>
-                    <ColumnDefinition Width="100" />
-                    <ColumnDefinition Width="100"/>
-                </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
 
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="*" />
-                </Grid.RowDefinitions>
-
-                <TextBlock Grid.Row="0" Text="{Binding Path=HighScore.Error}" Grid.ColumnSpan="2" Margin="5,0,0,0" VerticalAlignment="Center"/>
-                <TextBlock Grid.Row="0" TextAlignment="Right" Grid.ColumnSpan="2" Grid.Column="0" VerticalAlignment="Center">
+        <TextBlock Grid.Row="0" Text="{Binding Path=HighScore.Error}" Grid.ColumnSpan="2" Margin="5,0,0,0" VerticalAlignment="Center"/>
+        <TextBlock Grid.Row="0" TextAlignment="Right" Grid.ColumnSpan="2" Grid.Column="0" VerticalAlignment="Center">
                         <Run Text="Username: " />
-                </TextBlock>
+        </TextBlock>
 
-                <TextBox Grid.Row="0" Grid.Column="2" Text="{Binding HighScore.Username, UpdateSourceTrigger=PropertyChanged}" MaxLength="12" Margin="0,0,10,0"/>
+        <TextBox Grid.Row="0" Grid.Column="2" Text="{Binding HighScore.Username, UpdateSourceTrigger=PropertyChanged}" MaxLength="12" Margin="0,0,10,0"/>
 
-                <Button Grid.Row="0" Grid.Column="3" Content="Lookup" Command="{Binding LoadCommand}" Margin="0,0,5,0" Height="24" IsDefault="True" />
+        <Button Grid.Row="0" Grid.Column="3" Content="Lookup" Command="{Binding LoadCommand}" Margin="0,0,5,0" Height="24" IsDefault="True" />
 
-                <DataGrid Grid.Row="1" Grid.ColumnSpan="4" Grid.Column="0" ItemsSource="{Binding HighScore.Skills.Values}" AutoGenerateColumns="False" CanUserAddRows="False" CanUserDeleteRows="False" CanUserResizeRows="False">
+        <DataGrid Grid.Row="1" Grid.ColumnSpan="4" Grid.Column="0" ItemsSource="{Binding HighScore.Skills.Values}" AutoGenerateColumns="False" CanUserAddRows="False" CanUserDeleteRows="False" CanUserResizeRows="False">
 
-                    <DataGrid.Columns>
-                        <DataGridTemplateColumn>
+            <DataGrid.Columns>
+                <DataGridTemplateColumn>
 
-                            <DataGridTemplateColumn.CellTemplate>
-                                <DataTemplate>
-                                    <Image Source="{Binding Path=Skill, Converter={converters:SkillToImageConverter}}" Height="20" Width="20" />
-                                </DataTemplate>
-                            </DataGridTemplateColumn.CellTemplate>
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Image Source="{Binding Path=Skill, Converter={converters:SkillToImageConverter}}" Height="20" Width="20" />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
 
-                        </DataGridTemplateColumn>
-                        <DataGridTextColumn Binding="{Binding Path=Skill}" Header="Skill" Width="4*" />
-                        <DataGridTextColumn Binding="{Binding Path=Rank}" Header="Rank" Width="2*" />
-                        <DataGridTextColumn Binding="{Binding Path=Level}" Header="Level" Width="1.5*" />
-                        <DataGridTextColumn Binding="{Binding Path=Xp}" Header="Xp" Width="2*" />
-                    </DataGrid.Columns>
+                </DataGridTemplateColumn>
+                <DataGridTextColumn Binding="{Binding Path=Skill}" Header="Skill" Width="4*" />
+                <DataGridTextColumn Binding="{Binding Path=Rank}" Header="Rank" Width="2*" />
+                <DataGridTextColumn Binding="{Binding Path=Level}" Header="Level" Width="1.5*" />
+                <DataGridTextColumn Binding="{Binding Path=Xp}" Header="Xp" Width="2*" />
+            </DataGrid.Columns>
 
-                </DataGrid>
-            </Grid>
-
-        </materialDesign:DialogHost>
-    </materialDesign:ColorZone>
+        </DataGrid>
+    </Grid>
 </UserControl>

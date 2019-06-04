@@ -1,9 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.26430.6
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.28922.388
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RyaScape", "RyaScape\RyaScape.csproj", "{1D569940-7665-4499-AA09-0055A4B32DD8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FluentDesign", "FluentDesign\FluentDesign.csproj", "{B494F644-2C7C-44FD-9D8F-036B645771CF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,8 +17,15 @@ Global
 		{1D569940-7665-4499-AA09-0055A4B32DD8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1D569940-7665-4499-AA09-0055A4B32DD8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1D569940-7665-4499-AA09-0055A4B32DD8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B494F644-2C7C-44FD-9D8F-036B645771CF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B494F644-2C7C-44FD-9D8F-036B645771CF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B494F644-2C7C-44FD-9D8F-036B645771CF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B494F644-2C7C-44FD-9D8F-036B645771CF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {4EA9E795-F5AF-4EC0-8C13-A06B7E78B2AD}
 	EndGlobalSection
 EndGlobal
