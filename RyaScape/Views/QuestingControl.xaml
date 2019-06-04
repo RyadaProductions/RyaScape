@@ -52,7 +52,7 @@
                             <ItemsControl ItemsSource="{Binding Requirements}" Margin="10,10,0,10" Visibility="{Binding Requirements, Converter={converters:QuestReqToVisibilityConverter}}">
                                 <ItemsControl.ItemTemplate>
                                     <DataTemplate>
-                                        <TextBlock Text="{Binding RequirementName}" TextDecorations="{Binding RequirementStatus}"/>
+                                        <TextBlock Text="{Binding Name}" TextDecorations="{Binding Status}"/>
                                     </DataTemplate>
                                 </ItemsControl.ItemTemplate>
                             </ItemsControl>

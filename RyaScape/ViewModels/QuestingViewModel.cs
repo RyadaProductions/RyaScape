@@ -48,10 +48,10 @@ namespace RyaScape.ViewModels
 
                 foreach (var skill in questViewModel.PrerequisiteSkills)
                 {
-                    var req = new Requirements
+                    var req = new RequirementsViewModel
                     {
-                        RequirementName = skill.Value + " " + skill.Key,
-                        RequirementStatus = Skills[skill.Key].Level >= skill.Value
+                        Name = skill.Value + " " + skill.Key,
+                        Status = Skills[skill.Key].Level >= skill.Value
                         ? TextDecorations.Strikethrough
                         : null
                     };
@@ -61,7 +61,7 @@ namespace RyaScape.ViewModels
 
                 if (questViewModel.PrerequisiteQuests.Count > 0)
                 {
-                    var req = new Requirements();
+                    var req = new RequirementsViewModel();
                     questViewModel.Requirements.Add(req);
                 }
 
@@ -69,12 +69,12 @@ namespace RyaScape.ViewModels
                 {
                     var tmpQuest = QuestList.FirstOrDefault(x => x.Name == quest.Name);
 
-                    var req = new Requirements();
+                    var req = new RequirementsViewModel();
 
                     if (tmpQuest != null)
                     {
-                        req.RequirementName = tmpQuest.Name;
-                        req.RequirementStatus = tmpQuest.Completed ? TextDecorations.Strikethrough : null;
+                        req.Name = tmpQuest.Name;
+                        req.Status = tmpQuest.Completed ? TextDecorations.Strikethrough : null;
                     }
 
                     questViewModel.Requirements.Add(req);
@@ -104,14 +104,14 @@ namespace RyaScape.ViewModels
 
             foreach (var quest in tempQuestList)
             {
-                var questRequirements = new ObservableCollection<Requirements>();
+                var questRequirements = new ObservableCollection<RequirementsViewModel>();
 
                 foreach (var skill in quest.Value.PrerequisiteSkills)
                 {
-                    var req = new Requirements
+                    var req = new RequirementsViewModel
                     {
-                        RequirementName = skill.Value + " " + skill.Key,
-                        RequirementStatus = Skills[skill.Key]?.Level >= skill.Value
+                        Name = skill.Value + " " + skill.Key,
+                        Status = Skills[skill.Key]?.Level >= skill.Value
                         ? TextDecorations.Strikethrough
                         : null
                     };
@@ -122,16 +122,16 @@ namespace RyaScape.ViewModels
 
                 if (quest.Value.PrerequisiteQuests.Count > 0)
                 {
-                    var req = new Requirements();
+                    var req = new RequirementsViewModel();
                     questRequirements.Add(req);
                 }
 
                 foreach (var quests in quest.Value.PrerequisiteQuests)
                 {
-                    var req = new Requirements
+                    var req = new RequirementsViewModel
                     {
-                        RequirementName = quests.Name,
-                        RequirementStatus = quests.Completed ? TextDecorations.Strikethrough : null
+                        Name = quests.Name,
+                        Status = quests.Completed ? TextDecorations.Strikethrough : null
                     };
 
 

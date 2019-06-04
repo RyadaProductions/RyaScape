@@ -11,7 +11,7 @@ namespace RyaScape.ViewModels
         private bool _completed;
         private List<Quest> _prerequisiteQuests;
         private Dictionary<SkillTypes, int> _prerequisiteSkills;
-        private ObservableCollection<Requirements> _requirements;
+        private ObservableCollection<RequirementsViewModel> _requirements;
 
         public string Name
         {
@@ -37,7 +37,7 @@ namespace RyaScape.ViewModels
             set => SetAndNotify(ref _prerequisiteSkills, value);
         }
 
-        public ObservableCollection<Requirements> Requirements
+        public ObservableCollection<RequirementsViewModel> Requirements
         {
             get => _requirements;
             set => SetAndNotify(ref _requirements, value);

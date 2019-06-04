@@ -82,7 +82,7 @@
     <Compile Include="Mvvm\AwaitableDelegateCommand.cs" />
     <Compile Include="Mvvm\BaseViewModel.cs" />
     <Compile Include="Mvvm\DelegateCommand.cs" />
-    <Compile Include="ViewModels\Requirements.cs" />
+    <Compile Include="ViewModels\RequirementsViewModel.cs" />
     <Compile Include="Views\AboutControl.xaml.cs">
       <DependentUpon>AboutControl.xaml</DependentUpon>
     </Compile>

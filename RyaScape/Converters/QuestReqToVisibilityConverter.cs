@@ -12,7 +12,7 @@ namespace RyaScape.Converters
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            return value is ObservableCollection<Requirements> temp && temp.Count == 0 ? Visibility.Collapsed : Visibility.Visible;
+            return value is ObservableCollection<RequirementsViewModel> temp && temp.Count == 0 ? Visibility.Collapsed : Visibility.Visible;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
