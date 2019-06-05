@@ -5,12 +5,12 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:viewModel="clr-namespace:RyaScape.ViewModels"
         xmlns:fluent="clr-namespace:FluentDesign.Controls;assembly=FluentDesign"
-        xmlns:dragablz="clr-namespace:Dragablz;assembly=Dragablz"
         xmlns:views="clr-namespace:RyaScape.Views"
         mc:Ignorable="d"
         Title="RyaScape" Height="500" Width="550" MaxWidth="550" Icon="Resources/RyaScape.ico"
         d:DataContext="{d:DesignInstance viewModel:MainViewModel, IsDesignTimeCreatable=False}"
         >
+
     <Grid>
         <DockPanel Margin="50">
             <TabControl>

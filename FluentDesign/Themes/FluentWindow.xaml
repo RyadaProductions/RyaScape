@@ -1,45 +1,24 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:fluentControls="clr-namespace:FluentDesign.Controls">
-
-    <Style TargetType="{x:Type Button}" x:Key="WindowButtonStyle">
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="{x:Type ButtonBase}">
-                    <Border
-                        x:Name="Chrome"
-                        BorderBrush="{TemplateBinding BorderBrush}"
-                        Margin="0"
-                        Background="{TemplateBinding Background}"
-                        SnapsToDevicePixels="True">
-                        <ContentPresenter
-                            ContentTemplate="{TemplateBinding ContentTemplate}"
-                            Content="{TemplateBinding Content}"
-                            ContentStringFormat="{TemplateBinding ContentStringFormat}"
-                            HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
-                            Margin="{TemplateBinding Padding}"
-                            RecognizesAccessKey="True"
-                            SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
-                            VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
-                    </Border>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
-        <Setter Property="Background" Value="Transparent"/>
-        <Setter Property="FontFamily" Value="Webdings"/>
-        <Setter Property="FontSize" Value="13.333" />
-        <Setter Property="Foreground" Value="AliceBlue" />
-        <Setter Property="Margin" Value="0,2,3,0"/>
-        <Style.Triggers>
-            <Trigger Property="IsMouseOver" Value="True">
-                <Setter Property="Foreground" Value="NavajoWhite" />
-            </Trigger>
-        </Style.Triggers>
-    </Style>
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="pack://application:,,,/FluentDesign;component/Themes/Button.xaml" />
+    </ResourceDictionary.MergedDictionaries>
 
     <DataTemplate x:Key="IconTemplate">
         <Image Source="{TemplateBinding Content}" Width="23" Height="23" Margin="10 0 0 0"/>
     </DataTemplate>
+
+    <Style x:Key="WindowTitleThumbStyle" TargetType="{x:Type Thumb}">
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate>
+                    <Grid Background="{TemplateBinding Background}" />
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
 
     <ControlTemplate x:Key="WindowTemplateKey" TargetType="{x:Type fluentControls:FluentWindow}">
         <Grid Background="{TemplateBinding Background}"
@@ -50,30 +29,27 @@
             <AdornerDecorator>
                 <Grid UseLayoutRounding="False">
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="1"/>
                         <ColumnDefinition Width="Auto"/>
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="Auto"/>
-                        <ColumnDefinition Width="1"/>
                     </Grid.ColumnDefinitions>
 
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="1"/>
-                        <RowDefinition Height="25"/>
+                        <RowDefinition Height="32"/>
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
 
-                    <Rectangle x:Name="titleBackground" 
-                               Fill="#99000000" 
-                               Grid.Row="1" 
-                               Grid.Column="1" 
+                    <Rectangle x:Name="PART_TitleBackground" 
+                               Fill="{DynamicResource WindowTitleBrush}" 
+                               Grid.Row="0" 
+                               Grid.Column="0" 
                                Grid.ColumnSpan="3" 
                                Focusable="False" 
                                StrokeThickness="0" />
 
-                    <ContentControl x:Name="icon" 
-                                    Grid.Row="1" 
-                                    Grid.Column="1"
+                    <ContentControl x:Name="PART_Icon" 
+                                    Grid.Row="0" 
+                                    Grid.Column="0"
                                     Height="10"
                                     MinWidth="10"
                                     HorizontalContentAlignment="Stretch"
@@ -83,32 +59,39 @@
                                     ContentTemplate="{StaticResource IconTemplate}"
                                     Focusable="False" />
 
-                    <TextBlock x:Name="title"
-                               Grid.Row="1"
-                               Grid.Column="2" 
+                    <TextBlock x:Name="PART_Title"
+                               Grid.Row="0"
+                               Grid.Column="1" 
                                FontSize="13.333"
                                Text="{TemplateBinding Title}"
                                VerticalAlignment="Center"
-                               Foreground="AliceBlue"/>
+                               Foreground="{DynamicResource ForegroundBrush}"/>
 
-                    <StackPanel Grid.Row="1" 
-                                Grid.Column="3" 
+                    <Thumb x:Name="PART_Thumb"
+                           Grid.Row="0"
+                           Grid.Column="0"
+                           Grid.ColumnSpan="2"
+                           Style="{DynamicResource WindowTitleThumbStyle}"
+                           UseLayoutRounding="True"/>
+
+                    <StackPanel Grid.Row="0" 
+                                Grid.Column="2" 
                                 Orientation="Horizontal">
-                        <Button x:Name="minimizeButton" 
+                        <Button x:Name="PART_MinimizeButton" 
                                 Style="{StaticResource WindowButtonStyle}"
                                 Content="0" />
-                        <Button x:Name="restoreButton" 
+                        <Button x:Name="PART_RestoreButton" 
                                 Style="{StaticResource WindowButtonStyle}"
                                 Content="1" />
-                        <Button x:Name="closeButton" 
+                        <Button x:Name="PART_CloseButton" 
                                 Style="{StaticResource WindowButtonStyle}"
                                 Content="r" />
                     </StackPanel>
 
                     <Grid Background="{TemplateBinding Background}"
-                          Grid.Row="2" 
+                          Grid.Row="1" 
                           Grid.Column="0" 
-                          Grid.ColumnSpan="5" 
+                          Grid.ColumnSpan="3" 
                           Margin="5,5,5,5">
                         <AdornerDecorator>
                             <ContentPresenter/>
@@ -117,17 +100,21 @@
                 </Grid>
             </AdornerDecorator>
 
-            <Border BorderBrush="AntiqueWhite" 
+            <Border BorderBrush="{DynamicResource ForegroundBrush}" 
                     BorderThickness="1" 
                     UseLayoutRounding="True" />
         </Grid>
     </ControlTemplate>
 
     <Style TargetType="{x:Type fluentControls:FluentWindow}">
-        <!-- TODO: Don't forget to change the value of the background into a preset, so we can have dark and light themes -->
-        <Setter Property="Background" Value="#7F2E2E2E" />
+        <Setter Property="Background" Value="{DynamicResource BackgroundBrush}" />
         <Setter Property="AllowsTransparency" Value="True" />
         <Setter Property="WindowStyle" Value="None" />
         <Setter Property="Template" Value="{StaticResource WindowTemplateKey}" />
+        <Style.Triggers>
+            <Trigger Property="IsActive" Value="False">
+                <Setter Property="Background" Value="{DynamicResource NonActiveBackgroundBrush}" />
+            </Trigger>
+        </Style.Triggers>
     </Style>
 </ResourceDictionary>

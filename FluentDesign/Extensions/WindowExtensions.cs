@@ -7,8 +7,6 @@ namespace FluentDesign.Extensions
 {
     internal static class WindowExtensions
     {
-        #region acrylic
-
         /// <summary>
         /// enum to specify what type of accent i want the fluentWindow to have.
         /// </summary>
@@ -16,18 +14,19 @@ namespace FluentDesign.Extensions
         {
             AccentDisabled = 0,
             AccentEnableGradient = 1,
-            AccentEnableTransparentgradient = 2,
-            AccentEnableBlurbehind = 3,
-            AccentInvalidState = 4
+            AccentEnableTransparentGradient = 2,
+            AccentEnableBlurBehind = 3,
+            AccentEnableAcrylicBlurBehind = 4,
+            AccentInvalidState = 5
         }
 
         [StructLayout(LayoutKind.Sequential)]
         private struct AccentPolicy
         {
             public AccentState AccentState;
-            private readonly int _accentFlags;
-            private readonly int _gradientColor;
-            private readonly int _animationId;
+            public int AccentFlags;
+            public uint GradientColor;
+            public int AnimationId;
         }
 
         [StructLayout(LayoutKind.Sequential)]
@@ -55,7 +54,9 @@ namespace FluentDesign.Extensions
 
             var accent = new AccentPolicy
             {
-                AccentState = AccentState.AccentEnableBlurbehind
+                AccentState = AccentState.AccentEnableBlurBehind,
+                AccentFlags = 2,
+                GradientColor = 0x00FFFFFF
             };
 
             var accentStructSize = Marshal.SizeOf(accent);
@@ -77,7 +78,5 @@ namespace FluentDesign.Extensions
 
         [DllImport("user32.dll")]
         private static extern int SetWindowCompositionAttribute(IntPtr hwnd, ref WindowCompositionAttributeData data);
-
-        #endregion
     }
 }

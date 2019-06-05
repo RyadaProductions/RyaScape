@@ -3,8 +3,13 @@ using FluentDesign.Extensions;
 
 namespace FluentDesign.Controls
 {
+    [TemplatePart(Name = PART_TitleBar, Type= typeof(UIElement))]
     public class FluentWindow : Window
     {
+        // ReSharper disable InconsistentNaming
+        private const string PART_TitleBar = "PART_TitleBar";
+        // ReSharper restore InconsistentNaming
+
         static FluentWindow()
         {
             DefaultStyleKeyProperty.OverrideMetadata(typeof(FluentWindow), new FrameworkPropertyMetadata(typeof(FluentWindow)));
