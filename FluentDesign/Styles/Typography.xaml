@@ -1,0 +1,66 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <!-- 
+    Typography: https://docs.microsoft.com/en-us/windows/uwp/design/style/typography
+    Font-weights: https://docs.microsoft.com/en-us/uwp/api/windows.ui.text.fontweights 
+    -->
+
+
+    <!-- BaseTextBlockStyle Style definition -->
+    <Style x:Key="BaseTextBlockStyle" TargetType="{x:Type TextBlock}">
+        <Setter Property="FontFamily" Value="Segoe UI"/>
+        <Setter Property="FontWeight" Value="SemiBold"/>
+        <Setter Property="FontSize" Value="14"/>
+        <Setter Property="TextTrimming" Value="None"/>
+        <Setter Property="TextWrapping" Value="Wrap"/>
+        <Setter Property="LineStackingStrategy" Value="MaxHeight"/>
+        <!--<Setter Property="TextLineBounds" Value="Full"/>-->
+    </Style>
+
+    <!-- HeaderTextBlockStyle Style definition -->
+    <Style x:Key="HeaderTextBlockStyle" TargetType="{x:Type TextBlock}"
+           BasedOn="{StaticResource BaseTextBlockStyle}">
+        <Setter Property="FontSize" Value="46"/>
+        <Setter Property="FontWeight" Value="Light"/>
+        <!--<Setter Property="OpticalMarginAlignment" Value="TrimSideBearings"/>-->
+    </Style>
+
+    <!-- SubheaderTextBlockStyle Style definition -->
+    <Style x:Key="SubheaderTextBlockStyle" TargetType="{x:Type TextBlock}" 
+           BasedOn="{StaticResource BaseTextBlockStyle}">
+        <Setter Property="FontSize" Value="34"/>
+        <Setter Property="FontWeight" Value="Light"/>
+        <!--<Setter Property="OpticalMarginAlignment" Value="TrimSideBearings"/>-->
+    </Style>
+
+    <!-- TitleTextBlockStyle Style definition -->
+    <Style x:Key="TitleTextBlockStyle" TargetType="{x:Type TextBlock}" 
+           BasedOn="{StaticResource BaseTextBlockStyle}">
+        <Setter Property="FontWeight" Value="350"/> <!-- Semilight maps to 350 -->
+        <Setter Property="FontSize" Value="24"/>
+        <!--<Setter Property="OpticalMarginAlignment" Value="TrimSideBearings"/>-->
+    </Style>
+
+    <!-- SubtitleTextBlockStyle Style definition -->
+    <Style x:Key="SubtitleTextBlockStyle" TargetType="{x:Type TextBlock}" 
+           BasedOn="{StaticResource BaseTextBlockStyle}">
+        <Setter Property="FontWeight" Value="Normal"/>
+        <Setter Property="FontSize" Value="20"/>
+        <!--<Setter Property="OpticalMarginAlignment" Value="TrimSideBearings"/>-->
+    </Style>
+
+    <!-- BodyTextBlockStyle Style definition -->
+    <Style x:Key="BodyTextBlockStyle" TargetType="{x:Type TextBlock}" 
+           BasedOn="{StaticResource BaseTextBlockStyle}">
+        <Setter Property="FontWeight" Value="Normal"/>
+    </Style>
+
+    <!-- CaptionTextBlockStyle Style definition -->
+    <Style x:Key="CaptionTextBlockStyle" TargetType="{x:Type TextBlock}" 
+           BasedOn="{StaticResource BaseTextBlockStyle}">
+        <Setter Property="FontSize" Value="12"/>
+        <Setter Property="FontWeight" Value="Normal"/>
+    </Style>
+
+    <Style BasedOn="{StaticResource BodyTextBlockStyle}" TargetType="TextBlock" />
+</ResourceDictionary>

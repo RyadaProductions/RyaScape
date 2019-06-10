@@ -2,23 +2,14 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:fluentControls="clr-namespace:FluentDesign.Controls">
     <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="pack://application:,,,/FluentDesign;component/Styles/Typography.xaml" />
         <ResourceDictionary Source="pack://application:,,,/FluentDesign;component/Themes/Button.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/FluentDesign;component/Themes/Thumb.xaml" />
     </ResourceDictionary.MergedDictionaries>
 
     <DataTemplate x:Key="IconTemplate">
         <Image Source="{TemplateBinding Content}" Width="23" Height="23" Margin="10 0 0 0"/>
     </DataTemplate>
-
-    <Style x:Key="WindowTitleThumbStyle" TargetType="{x:Type Thumb}">
-        <Setter Property="Background" Value="Transparent" />
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate>
-                    <Grid Background="{TemplateBinding Background}" />
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
-    </Style>
 
     <ControlTemplate x:Key="WindowTemplateKey" TargetType="{x:Type fluentControls:FluentWindow}">
         <Grid Background="{TemplateBinding Background}"
@@ -64,6 +55,7 @@
                                Grid.Column="1" 
                                FontSize="13.333"
                                Text="{TemplateBinding Title}"
+                               Style="{StaticResource TitleTextBlockStyle}"
                                VerticalAlignment="Center"
                                Foreground="{DynamicResource ForegroundBrush}"/>
 
@@ -88,8 +80,7 @@
                                 Content="r" />
                     </StackPanel>
 
-                    <Grid Background="{TemplateBinding Background}"
-                          Grid.Row="1" 
+                    <Grid Grid.Row="1" 
                           Grid.Column="0" 
                           Grid.ColumnSpan="3" 
                           Margin="5,5,5,5">
@@ -106,7 +97,8 @@
         </Grid>
     </ControlTemplate>
 
-    <Style TargetType="{x:Type fluentControls:FluentWindow}">
+    <Style x:Key="FluentWindowStyle" TargetType="{x:Type fluentControls:FluentWindow}">
+        <Setter Property="FontFamily" Value="Segoe UI" />
         <Setter Property="Background" Value="{DynamicResource BackgroundBrush}" />
         <Setter Property="AllowsTransparency" Value="True" />
         <Setter Property="WindowStyle" Value="None" />

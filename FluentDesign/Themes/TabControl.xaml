@@ -1,0 +1,51 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="pack://application:,,,/FluentDesign;component/Styles/Typography.xaml" />
+    </ResourceDictionary.MergedDictionaries>
+
+    <Style x:Key="StandardTabControlStyle" TargetType="{x:Type TabControl}">
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="BorderThickness" Value="0" />
+    </Style>
+
+    <Style TargetType="{x:Type TabPanel}">
+        <Setter Property="HorizontalAlignment" Value="Center" />
+    </Style>
+
+    <ControlTemplate x:Key="TabItemTemplate" TargetType="{x:Type TabItem}">
+        <Border Name="PART_TabItemBorder" Margin="10 2" Padding="0 0 0 3">
+            <ContentPresenter x:Name="PART_ContentSite"
+                              VerticalAlignment="Center"
+                              HorizontalAlignment="Center"
+                              ContentSource="Header">
+                <ContentPresenter.Resources>
+                    <Style TargetType="{x:Type TextBlock}" BasedOn="{StaticResource SubheaderTextBlockStyle}" />
+                </ContentPresenter.Resources>
+            </ContentPresenter>
+        </Border>
+        <ControlTemplate.Triggers>
+            <Trigger Property="IsSelected" Value="True">
+                <!-- Specific is selected style -->
+                <Setter Property="Foreground" Value="{DynamicResource ForegroundBrush}" />
+                <Setter TargetName="PART_TabItemBorder" Property="BorderThickness" Value="0 0 0 1" />
+                <Setter TargetName="PART_TabItemBorder" Property="BorderBrush" Value="{DynamicResource BorderBrush}" />
+            </Trigger>
+            <Trigger Property="IsSelected" Value="False">
+                <!-- Specific is not selected style -->
+                <Setter Property="Foreground" Value="{DynamicResource NonHighlightedForegroundBrush}" />
+                <Setter TargetName="PART_TabItemBorder" Property="BorderThickness" Value="0" />
+                <Setter TargetName="PART_TabItemBorder" Property="BorderBrush" Value="Transparent" />
+            </Trigger>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Foreground" Value="{DynamicResource ForegroundBrush}" />
+            </Trigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+
+    <Style x:Key="StandardTabItemStyle" TargetType="{x:Type TabItem}">
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="Template" Value="{StaticResource TabItemTemplate}" />
+    </Style>
+
+</ResourceDictionary>

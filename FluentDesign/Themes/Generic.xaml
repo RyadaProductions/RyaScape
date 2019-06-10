@@ -1,8 +1,12 @@
 ﻿<ResourceDictionary
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:controls="clr-namespace:FluentDesign.Controls">
 
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="pack://application:,,,/FluentDesign;component/Themes/FluentWindow.xaml" />
     </ResourceDictionary.MergedDictionaries>
+
+    <Style BasedOn="{StaticResource FluentWindowStyle}" TargetType="{x:Type controls:FluentWindow}" />
+
 </ResourceDictionary>

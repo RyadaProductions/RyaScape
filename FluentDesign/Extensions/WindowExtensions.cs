@@ -24,9 +24,9 @@ namespace FluentDesign.Extensions
         private struct AccentPolicy
         {
             public AccentState AccentState;
-            public int AccentFlags;
+            public uint AccentFlags;
             public uint GradientColor;
-            public int AnimationId;
+            public uint AnimationId;
         }
 
         [StructLayout(LayoutKind.Sequential)]
@@ -44,6 +44,10 @@ namespace FluentDesign.Extensions
             // ...
         }
 
+        // range between 0 and 255
+        private const uint _blurOpacity = 0;
+        private const uint _blurBackgroundColor = 0x990000;
+
         /// <summary>
         /// Enable the Aeroglass blur that is intended to be used in UWP.
         /// </summary>
@@ -55,8 +59,7 @@ namespace FluentDesign.Extensions
             var accent = new AccentPolicy
             {
                 AccentState = AccentState.AccentEnableBlurBehind,
-                AccentFlags = 2,
-                GradientColor = 0x00FFFFFF
+                GradientColor = (_blurOpacity << 24) | (_blurBackgroundColor & 0xFFFFFF)
             };
 
             var accentStructSize = Marshal.SizeOf(accent);

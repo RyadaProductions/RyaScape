@@ -12,7 +12,7 @@
         >
 
     <Grid>
-        <DockPanel Margin="50">
+        <DockPanel>
             <TabControl>
                 <TabItem Header="HighScore">
                     <views:HighScoreControl DataContext="{Binding HighScoreModel}"/>

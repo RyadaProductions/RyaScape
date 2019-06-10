@@ -5,10 +5,12 @@
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
+                <!-- Load base -->
+                <ResourceDictionary Source="pack://application:,,,/FluentDesign;component/Themes/Generic.xaml" />
                 <!-- Load theme resources (Dark/Light) -->
                 <ResourceDictionary Source="pack://application:,,,/FluentDesign;component/Styles/Themes/Dark.xaml" />
-                <!-- Load everything else -->
-                <ResourceDictionary Source="pack://application:,,,/FluentDesign;component/Themes/Generic.xaml" />
+                <!-- Load Controls -->
+                <ResourceDictionary Source="pack://application:,,,/FluentDesign;component/Themes/Controls.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>
